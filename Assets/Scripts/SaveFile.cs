@@ -1,20 +1,20 @@
 using System;
 using System.IO;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-public class SaveFile
+public class SaveFile<T>
 {
     private string _fileName;
-    private IFormatter _formatter;
+    private IFormatter _formatter = new BinaryFormatter();
     private string _fullPath;
-    public SaveFile(string fileName, IFormatter formatter)
+    public SaveFile(string fileName)
     {
         _fileName = fileName;
-        _formatter = formatter;
         _fullPath = Path.Combine(Application.persistentDataPath, _fileName);
     }
-    public void Save(object data)
+    public void Save(T data)
     {
         try
         {
@@ -31,9 +31,9 @@ public class SaveFile
             Debug.LogError("[!!!] Error while saving\n" + e.Message);
         }
     }
-    public object Load()
+    public T Load()
     {
-        if (File.Exists(_fullPath) == false) return null;
+        if (File.Exists(_fullPath) == false) return default(T);
 
         object result = null;
         try
@@ -50,6 +50,6 @@ public class SaveFile
         {
             Debug.LogError("[!!!] Error while saving\n" + e.Message);
         }
-        return result;
+        return (T) result;
     }
 }

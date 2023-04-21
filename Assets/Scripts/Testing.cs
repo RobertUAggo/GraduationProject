@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class Testing : MonoBehaviour
 {
-    public SaveFile TestSaveFile;
+    public SaveFile<int[]> TestSaveFile;
 
     [SerializeField] private int[] testField = new int[] {1,2,3};
 
     private void Awake()
     {
-        TestSaveFile = new SaveFile("Test", new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter());
+        TestSaveFile = new SaveFile<int[]>("Test");
     }
     [ContextMenu(nameof(TestSave))]
     private void TestSave()
@@ -21,7 +21,7 @@ public class Testing : MonoBehaviour
     [ContextMenu(nameof(TestLoad))]
     private void TestLoad()
     {
-        testField = (int[]) TestSaveFile.Load();
+        testField = TestSaveFile.Load();
         Debug.Log($"testField = [{string.Join(", ", testField)}]");
     }
 }
