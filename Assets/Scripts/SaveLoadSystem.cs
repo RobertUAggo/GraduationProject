@@ -17,7 +17,7 @@ public static class SaveLoadSystem
         switch (serializeType)
         {
             case SerializeType.JSON:
-                using (StreamWriter streamWriter = new StreamWriter(path + ".json"))
+                using (StreamWriter streamWriter = new StreamWriter(path))
                 {
                     using (JsonWriter jsonWriter = new JsonTextWriter(streamWriter))
                     {
@@ -27,7 +27,7 @@ public static class SaveLoadSystem
                 }
                 break;
             case SerializeType.XML:
-                using (TextWriter textWriter = new StreamWriter(path + ".xml"))
+                using (TextWriter textWriter = new StreamWriter(path))
                 {
                     XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
                     xmlSerializer.Serialize(textWriter, data);
@@ -50,7 +50,7 @@ public static class SaveLoadSystem
         switch (serializeType)
         {
             case SerializeType.JSON:
-                using (StreamReader streamWriter = new StreamReader(path + ".json"))
+                using (StreamReader streamWriter = new StreamReader(path))
                 {
                     using (JsonReader jsonReader = new JsonTextReader(streamWriter))
                     {
@@ -60,7 +60,7 @@ public static class SaveLoadSystem
                 }
                 break;
             case SerializeType.XML:
-                using (TextReader textReader = new StreamReader(path + ".xml"))
+                using (TextReader textReader = new StreamReader(path))
                 {
                     XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
                     result = (T)xmlSerializer.Deserialize(textReader);
