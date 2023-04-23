@@ -2,35 +2,55 @@ using System;
 using System.IO;
 using UnityEngine;
 
+[Serializable]
+public class TestData
+{
+    public string name = "TestName";
+    public float[] values = new float[] { 1, 2, 3 };
+    public override string ToString()
+    {
+        return $"{name} - {string.Join(", ", values)}";
+    }
+}
+
 public class Testing : MonoBehaviour
 {
     [SerializeField] private SerializeType serializeType;
+    [SerializeField] private TestData[] testDataArray;
     private string path;
     //private SaveLoadData<int[]> TestFile = new SaveLoadData<int[]>();
-    [SerializeField] private int[] testField = new int[] {1,2,3};
     //private int[][] testField2 = new int[][] { new int[] { 1, 2, 3 }, new int[] { 1, 2, 3 }, new int[] { 1, 2, 3 } };
-    private void Awake()
+    private void SetPath()
     {
         path = Path.Combine(Application.persistentDataPath, "test");
+        switch (serializeType)
+        {
+            case SerializeType.JSON:
+                path += ".json";
+                break;
+            case SerializeType.XML:
+                path += ".xml";
+                break;
+        }
     }
 
     [ContextMenu(nameof(TestSave))]
     private void TestSave()
     {
+        SetPath();
         CheckTime($"{serializeType} SaveTime", () =>
         {
-            SaveLoadSystem.Save(testField, path, serializeType);
+            SaveLoadSystem.Save(testDataArray, path, serializeType);
         });
-        Debug.Log($"Saved = [{string.Join(", ", testField)}]");
     }
     [ContextMenu(nameof(TestLoad))]
     private void TestLoad()
     {
+        SetPath();
         CheckTime($"{serializeType} LoadTime", () =>
         {
-            testField = SaveLoadSystem.Load<int[]>(path, serializeType);
+            testDataArray = SaveLoadSystem.Load<TestData[]>(path, serializeType);
         });
-        Debug.Log($"Loaded = [{string.Join(", ", testField)}]");
     }
 
 #if UNITY_EDITOR
@@ -38,6 +58,7 @@ public class Testing : MonoBehaviour
     [ContextMenu(nameof(LogPath))]
     private void LogPath()
     {
+        SetPath();
         Debug.Log($"path = {path}");
     }
 #endif

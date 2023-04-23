@@ -167,9 +167,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b921cb0e5c774c148b41c5073682f5a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Encryption: 0
-  serializeType: 0
-  testField: 000000000100000002000000
+  serializeType: 3
+  testDataArray:
+  - name: test1
+    values:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - name: test2
+    values: []
+  - name: 
+    values:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
