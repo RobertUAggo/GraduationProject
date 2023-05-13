@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Main : MonoSingleton<Main>
+public class Menu : MonoSingleton<Menu>
 {
     private void Awake()
     {
         SingletonInit();
-        //Debug.Log(Main.Instance, Main.Instance.gameObject);
     }
 }
