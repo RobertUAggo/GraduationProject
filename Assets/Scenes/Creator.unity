@@ -135,8 +135,9 @@ GameObject:
   - component: {fileID: 380281753}
   - component: {fileID: 380281752}
   - component: {fileID: 380281751}
+  - component: {fileID: 380281755}
   m_Layer: 5
-  m_Name: EditorCanvas
+  m_Name: EditorUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -224,6 +225,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &380281755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380281750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e055ad12e9190b442b73ec6ff2eb2bfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &626673320
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +432,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -522,3 +535,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6f795b036b65641b85fc634a0e969c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CreatorUI: {fileID: 380281755}

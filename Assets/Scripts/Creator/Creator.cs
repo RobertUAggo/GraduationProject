@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Creator : MonoSingleton<Creator>
 {
+    public CreatorUI CreatorUI;
     private void Awake()
     {
         SingletonInit();

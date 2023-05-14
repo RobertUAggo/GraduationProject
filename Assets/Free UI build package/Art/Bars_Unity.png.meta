@@ -342,13 +342,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bars_Unity_4
+      name: white_pixel
       rect:
         serializedVersion: 2
-        x: 1680
-        y: 624
-        width: 368
-        height: 103
+        x: 1917
+        y: 658
+        width: 1
+        height: 1
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1092,7 +1092,6 @@ TextureImporter:
       Bars_Unity_17: 21300034
       Bars_Unity_22: 21300044
       Bars_Unity_30: 21300060
-      Bars_Unity_4: 21300008
       Bars_Unity_38: 21300076
       Bars_Unity_16: 21300032
       Bars_Unity_13: 21300026
@@ -1120,6 +1119,7 @@ TextureImporter:
       Bars_Unity_3: 21300006
       Bars_Unity_15: 21300030
       Bars_Unity_25: 21300050
+      white_pixel: 21300008
       Bars_Unity_1: 21300002
       Bars_Unity_36: 21300072
       Bars_Unity_20: 21300040

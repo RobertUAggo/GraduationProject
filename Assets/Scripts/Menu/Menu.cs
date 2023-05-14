@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Menu : MonoSingleton<Menu>
 {
+    public MenuUI MenuUI;
     private void Awake()
     {
         SingletonInit();
