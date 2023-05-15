@@ -11,12 +11,15 @@ public enum GameScene
 
 public class SceneLoader : MonoBehaviour
 {
+    private GameScene _currentScene;
     public void Init()
     {
         SceneManager.sceneLoaded += SceneLoaded;
     }
     public void LoadScene(GameScene scene)
     {
+        SceneManager.UnloadSceneAsync((int)_currentScene);
+        _currentScene = scene;
         var loadOperation = SceneManager.LoadSceneAsync((int)scene, LoadSceneMode.Additive);
         StartCoroutine(C_LoadProcess(loadOperation));
     }

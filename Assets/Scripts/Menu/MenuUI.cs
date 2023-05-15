@@ -6,4 +6,8 @@ public class MenuUI : MonoBehaviour
 {
     public ShopUI ShopUI;
     public SettingsUI SettingsUI;
+    public void PlayClick()
+    {
+        Main.Instance.SceneLoader.LoadScene(GameScene.Level);
+    }
 }

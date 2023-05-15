@@ -9,9 +9,7 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             Debug.LogError($"Instance of {Instance.GetType().Name} already exists!");
         }
-        //Instance = GetComponent<T>();
         Instance = this as T;
-
-        Debug.Log($"MonoSingelton of {Instance.GetType().Name}");
+        //Debug.Log($"MonoSingelton of {Instance.GetType().Name}");
     }
 }

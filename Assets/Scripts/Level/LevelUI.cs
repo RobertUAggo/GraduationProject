@@ -9,4 +9,8 @@ public class LevelUI : MonoBehaviour
     {
 
     }
+    public void BackToMenuClick()
+    {
+        Main.Instance.SceneLoader.LoadScene(GameScene.Menu);
+    }
 }
