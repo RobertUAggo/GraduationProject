@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -28,7 +26,7 @@ public class Player : MonoBehaviour
         {
             skins[skinId].GameObjects[j].SetActive(true);
         }
-        SkinData data = Main.Instance.ItemsManager.Skinds[skinId];
+        SkinData data = Main.Instance.ItemsManager.Skins[skinId];
         data.Effect.Invoke(this);
     }
 }
