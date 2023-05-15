@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class LevelUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Joystick Joystick;
+    public void Init()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

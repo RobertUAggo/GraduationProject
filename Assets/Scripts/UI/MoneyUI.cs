@@ -9,6 +9,7 @@ public class MoneyUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textField;
     private void OnEnable()
     {
+        Set(Main.Instance.PlayerManager.PlayerData.Money);
         Main.Instance.PlayerManager.OnMoneyChange.AddListener(Set);
     }
     private void OnDisable()

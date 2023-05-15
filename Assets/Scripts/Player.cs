@@ -9,9 +9,21 @@ public class Player : MonoBehaviour
         public GameObject[] GameObjects;
     }
     [SerializeField] private SkinObjects[] skins;
+
+    public readonly HealthController HealthController = new HealthController();
     private void Start()
     {
+        HealthController.OnTakeDamage.AddListener(OnTakeDamage);
+        HealthController.OnDie.AddListener(OnDie);
         SetSkin(Main.Instance.PlayerManager.PlayerData.CurrentSkin);
+    }
+    private void OnTakeDamage(float damage)
+    {
+
+    }
+    private void OnDie()
+    {
+
     }
     public void SetSkin(int skinId)
     {
