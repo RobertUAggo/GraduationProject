@@ -1,3 +1,6 @@
+using System.IO;
+using UnityEngine;
+
 #if UNITY_EDITOR
 using UnityEngine.SceneManagement;
 #endif
@@ -5,10 +8,13 @@ using UnityEngine.SceneManagement;
 public class Main : MonoSingleton<Main>
 {
     public MainUI MainUI;
+    public ItemsManager ItemsManager;
     public SceneLoader SceneLoader;
+    public PlayerManager PlayerManager;
     private void Awake()
     {
         SingletonInit();
+        PlayerManager.Init();
         MainUI.Init();
         SceneLoader.Init();
         //Debug.Log(Main.Instance, Main.Instance.gameObject);
