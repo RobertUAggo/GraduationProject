@@ -197,14 +197,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66be0fd467ee75f4a83131fd0480f997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skins:
-  - GameObjects:
-    - {fileID: 3660801776225261094}
-    - {fileID: 3823892952983835999}
-    - {fileID: 6293329355890769013}
-    - {fileID: 6253278621390976425}
-    - {fileID: 7436176278172693747}
-  - GameObjects:
-    - {fileID: 7323777149475272821}
-  - GameObjects:
-    - {fileID: 7323777150020117573}
+  SkinManager:
+    skins:
+    - Name: Underpants
+      Sprite: {fileID: 0}
+      Description: Ha-ha, realy?
+      GameObjects:
+      - {fileID: 7436176278172693747}
+      - {fileID: 6253278621390976425}
+      - {fileID: 6293329355890769013}
+      - {fileID: 3660801776225261094}
+      - {fileID: 3823892952983835999}
+      Effect:
+        m_PersistentCalls:
+          m_Calls: []
+    - Name: Simple
+      Sprite: {fileID: 0}
+      Description: It will protect, maybe
+      GameObjects:
+      - {fileID: 7323777149475272821}
+      Effect:
+        m_PersistentCalls:
+          m_Calls: []
+    - Name: Armor
+      Sprite: {fileID: 0}
+      Description: Finally something that will protect more than a mosquito bite
+      GameObjects:
+      - {fileID: 7323777150020117573}
+      Effect:
+        m_PersistentCalls:
+          m_Calls: []

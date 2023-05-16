@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class ItemsManager : MonoBehaviour
 {
-    public SkinData[] Skins;
+    public EnvironmentObject[] EnvironmentObjects;
 }

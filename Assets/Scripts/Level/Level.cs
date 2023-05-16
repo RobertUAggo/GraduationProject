@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Level : MonoSingleton<Level>
 {
+    public EnvironmentManager EnvironmentManager;
     public PlayerController PlayerController;
     public LevelUI LevelUI;
     private void Awake()
@@ -11,5 +10,7 @@ public class Level : MonoSingleton<Level>
         SingletonInit();
         LevelUI.Init();
         PlayerController.Init();
+        EnvironmentManager.Init();
     }
+
 }

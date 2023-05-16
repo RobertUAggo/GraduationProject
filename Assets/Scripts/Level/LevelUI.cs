@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LevelUI : MonoBehaviour
 {
-    public Joystick Joystick;
     public void Init()
     {
 
