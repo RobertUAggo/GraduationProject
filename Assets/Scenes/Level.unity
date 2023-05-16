@@ -1034,6 +1034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2b33eccdf8acd4d973cedb5ecebb88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navMeshSurface: {fileID: 796133192}
 --- !u!1001 &1326220956
 PrefabInstance:
   m_ObjectHideFlags: 0

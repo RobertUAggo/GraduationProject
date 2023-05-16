@@ -11,5 +11,5 @@ public class EnvironmentObject : MonoBehaviour
     public string Name;
     public Sprite Sprite;
     public EnviromentObjectType EnviromentObjectType;
-    
+    public int ObjectId { get; set; }
 }

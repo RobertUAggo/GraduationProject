@@ -5,4 +5,8 @@ using UnityEngine;
 public class ItemsManager : MonoBehaviour
 {
     public EnvironmentObject[] EnvironmentObjects;
+    private void Awake()
+    {
+        
+    }
 }

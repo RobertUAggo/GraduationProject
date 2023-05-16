@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnvironmentObjectSaveData
+public struct EnvironmentObjectSaveData
 {
     public int ObjectId;
     public Vector2 Position;
