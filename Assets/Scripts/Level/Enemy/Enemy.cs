@@ -1,26 +1,27 @@
-using System;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class Player : BaseCreature
+public class Enemy : BaseCreature
 {
-    [SerializeField] private FillBarUI healthBarUI;
-    public SkinManager SkinManager;
+    private NavMeshAgent _navAgent;
     private void Awake()
     {
-        SkinManager.SetSkin(Main.Instance.PlayerManager.PlayerData.CurrentSkin);
+        _navAgent = GetComponent<NavMeshAgent>();
         OnTakeDamage.AddListener(AfterTakeDamage);
         OnDie.AddListener(AfterDie);
         MaxHealth = 100; //TODO
         Health = MaxHealth;
     }
-
     private void AfterTakeDamage(float damage)
     {
-        healthBarUI.Set(Health, MaxHealth);
+
     }
     private void AfterDie()
     {
 
     }
-    
+    public void StartChase(Player player)
+    {
+        _navAgent.SetDestination(player.transform.position);
+    }
 }
