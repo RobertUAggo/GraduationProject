@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 380281751}
   - component: {fileID: 380281755}
   m_Layer: 5
-  m_Name: EditorUI
+  m_Name: CreatorUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2066,6 +2066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CreatorUI: {fileID: 380281755}
+  EnvironmentManager: {fileID: 0}
 --- !u!1 &1735125837
 GameObject:
   m_ObjectHideFlags: 0
