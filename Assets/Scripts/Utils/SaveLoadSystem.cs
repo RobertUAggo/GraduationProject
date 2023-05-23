@@ -58,12 +58,11 @@ public static class SaveLoadSystem
                 }
                 break;
         }
-
     }
     public static T Load<T>(string path, SerializeType serializeType)
     {
-        if (File.Exists(path) == false) return default(T);
-        T result = default(T);
+        if (File.Exists(path) == false) Save((T)Activator.CreateInstance(typeof(T)), path, serializeType);
+        T result;
         switch (serializeType)
         {
             case SerializeType.JSON:
@@ -99,6 +98,9 @@ public static class SaveLoadSystem
                         result = (T)binaryFormatter.Deserialize(cryptoStream);
                     }
                 }
+                break;
+            default:
+                result = default(T);
                 break;
         }
         return result;

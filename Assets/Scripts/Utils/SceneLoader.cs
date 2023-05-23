@@ -11,6 +11,7 @@ public enum GameScene
 
 public class SceneLoader : MonoBehaviour
 {
+    public string LevelDataFilePath;
     private GameScene _currentScene;
     public void Init()
     {

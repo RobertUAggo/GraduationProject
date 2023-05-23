@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 061e19bbc5cc0be4d92f0648bd2c9189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelDataFilePath: 
 --- !u!4 &297057524
 Transform:
   m_ObjectHideFlags: 0
@@ -845,7 +846,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f118aab9b74fc4d973c4b151c3f4c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnvironmentObjects: []
+  EnvironmentObjects:
+  - {fileID: 3351560544338822328, guid: 9f07190b45721d545bb2fb70f0ce6850, type: 3}
 --- !u!1 &924560958
 GameObject:
   m_ObjectHideFlags: 0

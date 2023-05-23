@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class CreatorUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject mainButtonsPanel;
+    public void SaveClick()
     {
-        
+        Creator.Instance.EnvironmentManager.Save();
     }
-
-    // Update is called once per frame
-    void Update()
+    public void SaveAsClick()
     {
-        
+
     }
 }
