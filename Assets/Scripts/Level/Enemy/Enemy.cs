@@ -19,6 +19,10 @@ public class Enemy : BaseCreature
         MaxHealth = 100; //TODO
         Health = MaxHealth;
     }
+    private void Start()
+    {
+        StartChase(Level.Instance.PlayerController.transform);
+    }
     private void AfterTakeDamage(float damage)
     {
 
@@ -52,6 +56,7 @@ public class Enemy : BaseCreature
                 Attack.Invoke(target);
                 yield return new WaitForSeconds(attackRate);
             }
+            yield return new WaitForFixedUpdate();
         }
     }
 }
