@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform followTarget;
-    [SerializeField] private float smoothTime = 0.5f;
+    [SerializeField] private float smoothTime = 0.1f;
     private Vector3 _offset;
     private Vector3 _velocity = Vector3.zero;
     private void Start()

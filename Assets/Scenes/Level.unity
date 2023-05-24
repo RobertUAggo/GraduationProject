@@ -651,8 +651,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1326220958}
+  animator: {fileID: 1813462018}
   joystick: {fileID: 1748680788}
-  baseSpeed: 10
+  baseSpeed: 4
 --- !u!54 &333691340
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1243,7 +1244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 333691338}
-  smoothTime: 0.5
+  smoothTime: 0.1
 --- !u!1 &1601977545
 GameObject:
   m_ObjectHideFlags: 0
@@ -1498,3 +1499,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a47f546fc70ec8428172694e78e4288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1813462018 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6530618288390507656, guid: 3bf61cabdb5e4ca4db6d273427a1566b, type: 3}
+  m_PrefabInstance: {fileID: 1326220956}
+  m_PrefabAsset: {fileID: 0}
