@@ -8,5 +8,9 @@ public class Menu : MonoSingleton<Menu>
     private void Awake()
     {
         SingletonInit();
+        MenuUI.Init();
+#if UNITY_EDITOR
+        Main.Instance.SceneLoader.EditorSetCurrentScene(GameScene.Menu);
+#endif
     }
 }

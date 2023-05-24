@@ -8,8 +8,12 @@ public class Level : MonoSingleton<Level>
     private void Awake()
     {
         SingletonInit();
+        EnvironmentManager.Init();
         LevelUI.Init();
         PlayerController.Init();
+#if UNITY_EDITOR
+        Main.Instance.SceneLoader.EditorSetCurrentScene(GameScene.Level);
+#endif
     }
 
 }

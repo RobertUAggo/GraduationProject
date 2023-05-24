@@ -44,4 +44,10 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.SetActiveScene(scene);
     }
+#if UNITY_EDITOR
+    public void EditorSetCurrentScene(GameScene scene)
+    {
+        _currentScene = scene;
+    }
+#endif
 }

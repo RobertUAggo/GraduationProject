@@ -780,7 +780,7 @@ GameObject:
   - component: {fileID: 796133194}
   - component: {fileID: 796133193}
   - component: {fileID: 796133192}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NavMeshSurface
   m_TagString: Untagged
   m_Icon: {fileID: 0}

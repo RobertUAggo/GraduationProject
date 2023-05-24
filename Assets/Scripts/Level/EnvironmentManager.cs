@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EnvironmentManager : MonoBehaviour
 {
+    [SerializeField] private string testName = "Name";
     [SerializeField] private NavMeshSurface navMeshSurface;
     private readonly List<EnvironmentObject> _currentObjects = new List<EnvironmentObject>();
-    private void Awake()
+    public void Init()
     {
 #if UNITY_EDITOR
         if(Main.Instance.SceneLoader.LevelDataFilePath.Length == 0)
@@ -17,9 +18,9 @@ public class EnvironmentManager : MonoBehaviour
 #endif
         Load(Main.Instance.SceneLoader.LevelDataFilePath);
     }
-    public EnvironmentObject AddObject(int objectId, Vector2 position, float rotationY)
+    public EnvironmentObject AddObject(int objectId, float positionX, float positionZ, float rotationY)
     {
-        Vector3 resultPos = new Vector3(position.x, 0, position.y);
+        Vector3 resultPos = new Vector3(positionX, 0, positionZ);
         Quaternion resultRot = Quaternion.Euler(0, rotationY, 0);
         EnvironmentObject newObject = Instantiate(Main.Instance.ItemsManager.EnvironmentObjects[objectId],
             resultPos,
@@ -38,26 +39,30 @@ public class EnvironmentManager : MonoBehaviour
         Main.Instance.SceneLoader.LevelDataFilePath = path;
         LevelSaveData levelSaveData = SaveLoadSystem.Load<LevelSaveData>(path, SerializeType.JSON);
         Load(levelSaveData);
+        Debug.Log($"Load: {path} (Objects: {_currentObjects.Count})");
     }
     public void Load(LevelSaveData levelSaveData)
     {
         foreach (var objData in levelSaveData.EnvironmentObjects)
         {
-            AddObject(objData.ObjectId, objData.Position, objData.RotationY);
+            AddObject(objData.ObjectId, objData.PositionX, objData.PositionZ, objData.RotationY);
         }
         navMeshSurface.BuildNavMesh();
     }
     public void Save(string path)
     {
+        Debug.Log($"Save: {path} (Objects: {_currentObjects.Count})");
         Main.Instance.SceneLoader.LevelDataFilePath = path;
         LevelSaveData levelSaveData = new LevelSaveData();
-        levelSaveData.EnvironmentObjects = new List<EnvironmentObjectSaveData>(_currentObjects.Count);
-        for (int i = 0; i < levelSaveData.EnvironmentObjects.Count; i++)
+        levelSaveData.Name = testName;
+        levelSaveData.EnvironmentObjects = new EnvironmentObjectSaveData[_currentObjects.Count];
+        for (int i = 0; i < levelSaveData.EnvironmentObjects.Length; i++)
         {
             levelSaveData.EnvironmentObjects[i] = new EnvironmentObjectSaveData()
             {
                 ObjectId = _currentObjects[i].ObjectId,
-                Position = new Vector2(_currentObjects[i].transform.position.x, _currentObjects[i].transform.position.z),
+                PositionX = _currentObjects[i].transform.position.x,
+                PositionZ = _currentObjects[i].transform.position.z,
                 RotationY = _currentObjects[i].transform.rotation.eulerAngles.y,
             };
         }

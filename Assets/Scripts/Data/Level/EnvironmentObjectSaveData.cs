@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public struct EnvironmentObjectSaveData
+[Serializable]
+public class EnvironmentObjectSaveData
 {
     public int ObjectId;
-    public Vector2 Position;
+    public float PositionX;
+    public float PositionZ;
     public float RotationY;
 }

@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class CreatorUI : MonoBehaviour
 {
-    [SerializeField] private GameObject mainButtonsPanel;
+    public ChoosePanelUI ChoosePanelUI;
+    public void Init()
+    {
+        ChoosePanelUI.Init();
+    }
     public void SaveClick()
     {
         Creator.Instance.EnvironmentManager.Save();
