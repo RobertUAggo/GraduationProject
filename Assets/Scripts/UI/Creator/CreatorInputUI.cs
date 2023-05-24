@@ -35,20 +35,32 @@ public class CreatorInputUI : MonoBehaviour, IPointerClickHandler, IDragHandler
         }
         else
         {
-            Debug.DrawLine(ray.origin, ray.direction * 25, Color.red, 5f);
-            OnDrag(eventData);
+            if (_currentEnvironmentObject != null)
+            {
+                Debug.DrawLine(ray.origin, ray.direction * 25, Color.cyan, 5f);
+                SetObjectPosition(_currentEnvironmentObject, eventData.position);
+                _currentEnvironmentObject = null;
+            }
+            else
+            {
+                Debug.DrawLine(ray.origin, ray.direction * 25, Color.red, 5f);
+            }
         }
     }
+    private void SetObjectPosition(EnvironmentObject environmentObject, Vector2 screenPos)
+    {
+        Ray ray = GetRay(screenPos);
+        if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue,
+            1 << LayersManager.Ground))
+        {
+            environmentObject.transform.position = hit.point;
+        }
+    } 
     public void OnDrag(PointerEventData eventData)
     {
         if (_currentEnvironmentObject != null)
         {
-            Ray ray = GetRay(eventData.position);
-            if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue,
-                1 << LayersManager.Ground))
-            {
-                _currentEnvironmentObject.transform.position = hit.point;
-            }
+            SetObjectPosition(_currentEnvironmentObject, eventData.position);
         }
         else
         {
