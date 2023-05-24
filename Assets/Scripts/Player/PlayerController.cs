@@ -8,12 +8,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Joystick joystick;
     [SerializeField] private float baseSpeed = 10;
     public Player Player => player;
+    private Rigidbody _rigidbody;
     public void Init()
     {
-        
+        _rigidbody = GetComponent<Rigidbody>();
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        transform.position += joystick.Direction3D * baseSpeed * Time.deltaTime;
+        _rigidbody.velocity = joystick.Direction3D * baseSpeed;
     }
 }
