@@ -37,7 +37,6 @@ public class CreatorInputUI : MonoBehaviour, IPointerClickHandler, IDragHandler
         {
             if (_currentEnvironmentObject != null)
             {
-                Debug.DrawLine(ray.origin, ray.direction * 25, Color.cyan, 5f);
                 SetObjectPosition(_currentEnvironmentObject, eventData.position);
                 _currentEnvironmentObject = null;
             }
