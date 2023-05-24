@@ -14,4 +14,8 @@ public class MenuUI : MonoBehaviour
     {
         Main.Instance.SceneLoader.LoadScene(GameScene.Level);
     }
+    public void CreatorClick()
+    {
+        Main.Instance.SceneLoader.LoadScene(GameScene.Creator);
+    }
 }
