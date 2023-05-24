@@ -34,7 +34,10 @@ public class CreatorUI : MonoBehaviour
         switchModeTextField.text = Creator.Instance.Mode.ToString();
         creatorInputUI.gameObject.SetActive(mode == CreatorMode.Camera);
     }
-
+    public void BackToMenuClick()
+    {
+        Main.Instance.SceneLoader.LoadScene(GameScene.Menu);
+    }
     public void SaveClick()
     {
         Creator.Instance.EnvironmentManager.Save();

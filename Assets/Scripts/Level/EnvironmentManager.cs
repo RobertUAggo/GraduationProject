@@ -7,6 +7,7 @@ public class EnvironmentManager : MonoBehaviour
     [SerializeField] private string testName = "Name";
     [SerializeField] private NavMeshSurface navMeshSurface;
     private readonly List<EnvironmentObject> _currentObjects = new List<EnvironmentObject>();
+    public Plane Plane { private set; get; }
     public void Init()
     {
 #if UNITY_EDITOR
@@ -16,6 +17,7 @@ public class EnvironmentManager : MonoBehaviour
                 Application.persistentDataPath + "\\" + "default.json";
         }
 #endif
+        Plane = new Plane(transform.up, transform.position.y);
         Load(Main.Instance.SceneLoader.LevelDataFilePath);
     }
     public EnvironmentObject AddObject(int objectId, float positionX, float positionZ, float rotationY)
