@@ -5,6 +5,7 @@ public class Creator : MonoSingleton<Creator>
     public EnvironmentManager EnvironmentManager;
     public CreatorUI CreatorUI;
     public CameraMover CameraMover;
+    public CreatorMode Mode = CreatorMode.Camera;
     //
     private void Awake()
     {

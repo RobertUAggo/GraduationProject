@@ -1,23 +1,40 @@
 using TMPro;
 using UnityEngine;
 
+public enum CreatorMode
+{
+    Camera,
+    Position,
+    Rotation,
+}
+
 public class CreatorUI : MonoBehaviour
 {
     [SerializeField] private CreatorInputUI creatorInputUI;
     [SerializeField] private TextMeshProUGUI switchModeTextField;
     public ChoosePanelUI ChoosePanelUI;
-    private bool _cameraMode = false;
     public void Init()
     {
         ChoosePanelUI.Init();
         SwitchModeClick();
+        SetMode(CreatorMode.Camera);
     }
     public void SwitchModeClick()
     {
-        _cameraMode = !_cameraMode;
-        switchModeTextField.text = _cameraMode ? "CAMERA" : "MOVING";
-        creatorInputUI.gameObject.SetActive(_cameraMode);
+        Creator.Instance.Mode++;
+        if(Creator.Instance.Mode > CreatorMode.Rotation)
+        {
+            Creator.Instance.Mode = 0;
+        }
+        SetMode(Creator.Instance.Mode);
     }
+    private void SetMode(CreatorMode mode)
+    {
+        Creator.Instance.Mode = mode;
+        switchModeTextField.text = Creator.Instance.Mode.ToString();
+        creatorInputUI.gameObject.SetActive(mode == CreatorMode.Camera);
+    }
+
     public void SaveClick()
     {
         Creator.Instance.EnvironmentManager.Save();

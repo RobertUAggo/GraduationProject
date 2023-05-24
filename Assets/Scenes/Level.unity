@@ -612,10 +612,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 333691338}
-  - component: {fileID: 333691339}
-  - component: {fileID: 333691341}
   - component: {fileID: 333691340}
-  m_Layer: 0
+  - component: {fileID: 333691341}
+  - component: {fileID: 333691339}
+  m_Layer: 3
   m_Name: PlayerController
   m_TagString: Untagged
   m_Icon: {fileID: 0}

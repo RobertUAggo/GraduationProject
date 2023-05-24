@@ -5,6 +5,6 @@ public class CreatorInputUI : MonoBehaviour, IDragHandler
 {
     public void OnDrag(PointerEventData eventData)
     {
-        Creator.Instance.CameraMover.Move(eventData.delta);
+        Creator.Instance.CameraMover.Move(eventData.delta / Main.Instance.MainUI.Canvas.scaleFactor);
     }
 }
