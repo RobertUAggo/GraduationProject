@@ -14,7 +14,7 @@ public abstract class BaseCreature : MonoBehaviour
         //Debug.Log($"{name} OnTakeDamage({damage})", gameObject);
         OnTakeDamage.Invoke(damage);
         Health -= damage;
-        if (Health < 0) Die();
+        if (Health <= 0) Die();
     }
     public void Die()
     {

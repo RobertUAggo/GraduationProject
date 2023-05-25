@@ -44,11 +44,11 @@ NavMeshAgent:
   m_GameObject: {fileID: 7551220004697765685}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.25
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Radius: 0.15
+  m_Speed: 2
+  m_Acceleration: 15
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 180
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -67,7 +67,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.25
+  m_Radius: 0.2
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
@@ -83,11 +83,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d906f4e7cdf4f854897216a0a0729325, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDistance: 2
-  attackRate: 1
-  Attack:
+  damage: 10
+  attackDistance: 1
+  attackRate: 1.75
+  animator: {fileID: 4880875855331567241}
+  OnAttack:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4672110471263686489}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: RotateTowards
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &4822899268214919671
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -152,5 +166,10 @@ PrefabInstance:
 --- !u!4 &4827460070857609915 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4771946628154188, guid: e45a69c421144304c8d8176026d3fd7b, type: 3}
+  m_PrefabInstance: {fileID: 4822899268214919671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4880875855331567241 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95204435929642878, guid: e45a69c421144304c8d8176026d3fd7b, type: 3}
   m_PrefabInstance: {fileID: 4822899268214919671}
   m_PrefabAsset: {fileID: 0}

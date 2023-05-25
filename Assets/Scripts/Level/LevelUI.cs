@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class LevelUI : MonoBehaviour
 {
+    public EndUI EndUI;
     public void Init()
     {
-
+        
     }
     public void BackToMenuClick()
     {

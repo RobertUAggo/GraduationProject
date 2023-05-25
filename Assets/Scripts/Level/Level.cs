@@ -15,5 +15,8 @@ public class Level : MonoSingleton<Level>
         Main.Instance.SceneLoader.EditorSetCurrentScene(GameScene.Level);
 #endif
     }
-
+    public void EndLevel()
+    {
+        LevelUI.EndUI.Show();
+    }
 }

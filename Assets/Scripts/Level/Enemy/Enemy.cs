@@ -5,9 +5,16 @@ using UnityEngine.Events;
 
 public class Enemy : BaseCreature
 {
+    private static int AttackParam = Animator.StringToHash("Attack");
+    private static int MoveSpeedParam = Animator.StringToHash("MoveSpeed");
+    private static int DeadParam = Animator.StringToHash("Dead");
+    private static int ResetParam = Animator.StringToHash("Reset");
+    //
+    [SerializeField] private float damage = 10;
     [SerializeField] private float attackDistance = 2f;
     [SerializeField] private float attackRate = 1f;
-    [SerializeField] private UnityEvent<Transform> Attack;
+    [SerializeField] private Animator animator;
+    [SerializeField] private UnityEvent<BaseCreature> OnAttack;
     private NavMeshAgent _navAgent;
     private float _attackDistanceSqr;
     private void Awake()
@@ -19,44 +26,60 @@ public class Enemy : BaseCreature
         MaxHealth = 100; //TODO
         Health = MaxHealth;
     }
-    private void Start()
+    private void OnEnable()
     {
-        StartChase(Level.Instance.PlayerController.transform);
+        animator.SetTrigger(ResetParam);
+        StartCoroutine(C_AfterEnable());
+    }
+    private IEnumerator C_AfterEnable()
+    {
+        yield return null;
+        StartChase(Level.Instance.PlayerController.Player);
     }
     private void AfterTakeDamage(float damage)
     {
 
     }
+    public void RotateTowards(BaseCreature target)
+    {
+        transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
+    }
     private void AfterDie()
     {
-
+        animator.SetTrigger(DeadParam);
     }
-    public void StartChase(Transform target)
+    public void StartChase(BaseCreature target)
     {
         StopAllCoroutines();
         StartCoroutine(C_ChaseLogic(target));
         StartCoroutine(C_AttackLogic(target));
     }
-    private IEnumerator C_ChaseLogic(Transform target)
+    private IEnumerator C_ChaseLogic(BaseCreature target)
     {
         yield return null;
         while (IsAlive && target != null)
         {
-            _navAgent.SetDestination(target.position);
+            _navAgent.SetDestination(target.transform.position);
             yield return new WaitForFixedUpdate();
         }
     }
-    private IEnumerator C_AttackLogic(Transform target)
+    private IEnumerator C_AttackLogic(BaseCreature target)
     {
         yield return null;
-        while (IsAlive && target != null)
+        while (IsAlive && target != null && target.IsAlive)
         {
-            if ((transform.position - target.position).sqrMagnitude < _attackDistanceSqr)
+            if ((transform.position - target.transform.position).sqrMagnitude < _attackDistanceSqr)
             {
-                Attack.Invoke(target);
+                OnAttack.Invoke(target);
+                animator.SetTrigger(AttackParam);
+                Level.Instance.PlayerController.Player.TakeDamage(damage);
                 yield return new WaitForSeconds(attackRate);
             }
-            yield return new WaitForFixedUpdate();
+            else
+            {
+                animator.ResetTrigger(AttackParam);
+                yield return new WaitForFixedUpdate();
+            }
         }
     }
 }

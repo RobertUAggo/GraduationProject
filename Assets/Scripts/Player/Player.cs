@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class Player : BaseCreature
 {
+    public static readonly int IsMovingParam = Animator.StringToHash("IsMoving");
+    private static readonly int DeadParam = Animator.StringToHash("Dead");
     [SerializeField] private FillBarUI healthBarUI;
     public SkinManager SkinManager;
+    public Animator Animator;
     private void Awake()
     {
         SkinManager.SetSkin(Main.Instance.PlayerManager.PlayerData.CurrentSkin);
@@ -20,7 +23,9 @@ public class Player : BaseCreature
     }
     private void AfterDie()
     {
-
+        healthBarUI.gameObject.SetActive(false);
+        Level.Instance.EndLevel();
+        Animator.SetTrigger(DeadParam);
     }
     
 }
