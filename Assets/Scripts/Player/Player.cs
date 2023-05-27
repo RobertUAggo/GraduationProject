@@ -35,5 +35,4 @@ public class Player : BaseCreature
         Level.Instance.EndLevel();
         Animator.SetTrigger(DeadParam);
     }
-    
 }

@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,20 +7,27 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Joystick joystick;
     [SerializeField] private float baseSpeed = 4;
     public Player Player => player;
-    private Rigidbody _rigidbody;
+    public NavMeshAgent NavAgent;
     public void Init()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        
     }
-    private void FixedUpdate()
+    private void Update()
     {
-        _rigidbody.velocity = joystick.Direction3D * baseSpeed;
-        if(_rigidbody.velocity != Vector3.zero) _rigidbody.rotation = Quaternion.LookRotation(joystick.Direction3D);
-        Player.Animator.SetBool(Player.IsMovingParam, _rigidbody.velocity != Vector3.zero);
+        if (joystick.Direction3D != Vector3.zero)
+        {
+            NavAgent.Move(joystick.Direction3D * Time.deltaTime * NavAgent.speed);
+            transform.rotation = Quaternion.LookRotation(joystick.Direction3D);
+            Player.Animator.SetBool(Player.IsMovingParam, true);
+        }
+        else
+        {
+            Player.Animator.SetBool(Player.IsMovingParam, false);
+        }
     }
     public void Disable()
     {
-        _rigidbody.velocity = Vector3.zero;
+        NavAgent.isStopped = true;
         joystick.gameObject.SetActive(false);
         enabled = false;
     }
