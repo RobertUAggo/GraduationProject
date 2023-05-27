@@ -7,17 +7,17 @@ public class EnemiesManager : MonoBehaviour
     [SerializeField] private float despawnDelay = 2;
     [SerializeField] private int[] capacities = new int[] { 25, 15, 10 };
     [SerializeField] private Enemy[] enemiesPrefabs;
-    public Pool<Enemy>[] EnemiesPool;
-    private void Awake()
+    private Pool<Enemy>[] _enemiesPool;
+    public void Init()
     {
-        EnemiesPool = new Pool<Enemy>[enemiesPrefabs.Length];
-        for (int i = 0; i < EnemiesPool.Length; i++)
+        _enemiesPool = new Pool<Enemy>[enemiesPrefabs.Length];
+        for (int i = 0; i < _enemiesPool.Length; i++)
         {
-            EnemiesPool[i] = new Pool<Enemy>(enemiesPrefabs[i],
+            _enemiesPool[i] = new Pool<Enemy>(enemiesPrefabs[i],
                 transform,
                 capacities.Length < i ? capacities[i] : capacities[capacities.Length - 1]);
-            EnemiesPool[i].OnCreate.AddListener(enemy => OnCreateEnemy(i, enemy));
-            EnemiesPool[i].Init();
+            _enemiesPool[i].OnCreate.AddListener(enemy => OnCreateEnemy(i, enemy));
+            _enemiesPool[i].Init();
         }
     }
     private void Start()
@@ -33,11 +33,11 @@ public class EnemiesManager : MonoBehaviour
 #endif
     public void SpawnEnemy(int type, Vector3 position)
     {
-        var newEnemy = EnemiesPool[type].Take();
-        newEnemy.transform.position = position;
-        newEnemy.NavAgent.enabled = true;
-        newEnemy.gameObject.SetActive(true);
-        newEnemy.OnDie.AddListener(() => DespawnEnemy(type, newEnemy));
+        var newInstance = _enemiesPool[type].Take();
+        newInstance.transform.position = position;
+        newInstance.NavAgent.enabled = true;
+        newInstance.gameObject.SetActive(true);
+        newInstance.OnDie.AddListener(() => DespawnEnemy(type, newInstance));
     }
     private void DespawnEnemy(int type, Enemy instance)
     {
@@ -48,7 +48,7 @@ public class EnemiesManager : MonoBehaviour
         yield return new WaitForSeconds(despawnDelay);
         instance.gameObject.SetActive(false);
         instance.NavAgent.enabled = false;
-        EnemiesPool[type].BackToQueue(instance);
+        _enemiesPool[type].BackToQueue(instance);
     }
     private void OnCreateEnemy(int type, Enemy instance)
     {

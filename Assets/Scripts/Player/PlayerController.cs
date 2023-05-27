@@ -19,4 +19,10 @@ public class PlayerController : MonoBehaviour
         if(_rigidbody.velocity != Vector3.zero) _rigidbody.rotation = Quaternion.LookRotation(joystick.Direction3D);
         Player.Animator.SetBool(Player.IsMovingParam, _rigidbody.velocity != Vector3.zero);
     }
+    public void Disable()
+    {
+        _rigidbody.velocity = Vector3.zero;
+        joystick.gameObject.SetActive(false);
+        enabled = false;
+    }
 }

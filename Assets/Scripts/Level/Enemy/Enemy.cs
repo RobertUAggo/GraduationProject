@@ -10,6 +10,8 @@ public class Enemy : BaseCreature
     private static int DeadParam = Animator.StringToHash("Dead");
     private static int ResetParam = Animator.StringToHash("Reset");
     //
+    [SerializeField] private AnimationCurve damagePerLevel;
+    [SerializeField] private AnimationCurve healthPerLevel;
     [SerializeField] private float damage = 10;
     [SerializeField] private float attackDistance = 2f;
     [SerializeField] private float attackRate = 1f;

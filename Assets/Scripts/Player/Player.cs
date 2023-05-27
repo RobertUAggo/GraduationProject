@@ -16,10 +16,18 @@ public class Player : BaseCreature
         MaxHealth = 100; //TODO
         Health = MaxHealth;
     }
-
+#if UNITY_EDITOR
+    [ContextMenu(nameof(TestTakeDamage))]
+    private void TestTakeDamage()
+    {
+        TakeDamage(10);
+    }
+#endif
     private void AfterTakeDamage(float damage)
     {
         healthBarUI.Set(Health, MaxHealth);
+        Level.Instance.FloatingDamage.Show($"-{damage}", 
+            transform.position + transform.up * 2);
     }
     private void AfterDie()
     {
