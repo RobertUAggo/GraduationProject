@@ -15,12 +15,12 @@ public class Enemy : BaseCreature
     [SerializeField] private float attackRate = 1f;
     [SerializeField] private Animator animator;
     [SerializeField] private UnityEvent<BaseCreature> OnAttack;
-    private NavMeshAgent _navAgent;
+    public NavMeshAgent NavAgent { private set; get; }
     private float _attackDistanceSqr;
     private void Awake()
     {
         _attackDistanceSqr = attackDistance * attackDistance;
-        _navAgent = GetComponent<NavMeshAgent>();
+        NavAgent = GetComponent<NavMeshAgent>();
         OnTakeDamage.AddListener(AfterTakeDamage);
         OnDie.AddListener(AfterDie);
         MaxHealth = 100; //TODO
@@ -40,13 +40,13 @@ public class Enemy : BaseCreature
     {
 
     }
-    public void RotateTowards(BaseCreature target)
-    {
-        transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
-    }
     private void AfterDie()
     {
         animator.SetTrigger(DeadParam);
+    }
+    public void RotateTowards(BaseCreature target)
+    {
+        transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
     }
     public void StartChase(BaseCreature target)
     {
@@ -59,7 +59,7 @@ public class Enemy : BaseCreature
         yield return null;
         while (IsAlive && target != null)
         {
-            _navAgent.SetDestination(target.transform.position);
+            NavAgent.SetDestination(target.transform.position);
             yield return new WaitForFixedUpdate();
         }
     }

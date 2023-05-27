@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,6 +17,7 @@ public abstract class BaseCreature : MonoBehaviour
         Health -= damage;
         if (Health <= 0) Die();
     }
+    [ContextMenu(nameof(Die))]
     public void Die()
     {
         Health = 0;
