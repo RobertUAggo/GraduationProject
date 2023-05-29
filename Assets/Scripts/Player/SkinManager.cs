@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkinManager
 {
     [SerializeField] private SkinData[] skins;
+    public SkinData CurrentSkin { private set; get; }
     public void SetSkin(int skinId)
     {
         for (int i = 0; i < skins.Length; i++)
@@ -14,11 +15,10 @@ public class SkinManager
                 skins[i].GameObjects[j].SetActive(false);
             }
         }
-        var currentSkinData = skins[skinId];
-        for (int j = 0; j < currentSkinData.GameObjects.Length; j++)
+        CurrentSkin = skins[skinId];
+        for (int j = 0; j < CurrentSkin.GameObjects.Length; j++)
         {
-            currentSkinData.GameObjects[j].SetActive(true);
+            CurrentSkin.GameObjects[j].SetActive(true);
         }
-        currentSkinData.Effect.Invoke();
     }
 }

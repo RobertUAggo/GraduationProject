@@ -5,12 +5,14 @@ public class Level : MonoSingleton<Level>
     public LevelUI LevelUI;
     public PlayerController PlayerController;
     public EnemiesManager EnemiesManager;
+    public BulletsManager BulletManager;
     public EnvironmentManager EnvironmentManager;
     public FloatingTextManager FloatingDamage;
     private void Awake()
     {
         SingletonInit();
         EnvironmentManager.Init();
+        BulletManager.Init();
         EnemiesManager.Init();
         PlayerController.Init();
         FloatingDamage.Init();

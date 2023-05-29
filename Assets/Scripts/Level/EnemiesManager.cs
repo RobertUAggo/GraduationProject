@@ -28,16 +28,17 @@ public class EnemiesManager : MonoBehaviour
     [ContextMenu(nameof(TestSpawnEnemy))]
     private void TestSpawnEnemy()
     {
-        SpawnEnemy(0, Vector3.zero);
+        SpawnEnemy(1, 0, Vector3.zero);
     }
 #endif
-    public void SpawnEnemy(int type, Vector3 position)
+    public void SpawnEnemy(int type, int level, Vector3 position)
     {
         var newInstance = _enemiesPool[type].Take();
         newInstance.transform.position = position;
         newInstance.NavAgent.enabled = true;
         newInstance.gameObject.SetActive(true);
         newInstance.OnDie.AddListener(() => DespawnEnemy(type, newInstance));
+        newInstance.Init(level);
     }
     private void DespawnEnemy(int type, Enemy instance)
     {

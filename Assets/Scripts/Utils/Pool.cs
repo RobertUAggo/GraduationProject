@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Pool<T> where T : MonoBehaviour
+public class Pool<T> where T :  Component
 {
     private int totalCount = 0;
     private readonly T _prefab;

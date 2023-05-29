@@ -202,7 +202,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66be0fd467ee75f4a83131fd0480f997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseHealth: 100
+  baseDamage: 1
+  maxExpPerLevel:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 2
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   healthBarUI: {fileID: 0}
+  expBarUI: {fileID: 0}
   SkinManager:
     skins:
     - Name: Underpants
@@ -214,7 +241,7 @@ MonoBehaviour:
       - {fileID: 6293329355890769013}
       - {fileID: 3660801776225261094}
       - {fileID: 3823892952983835999}
-      Effect:
+      OnStart:
         m_PersistentCalls:
           m_Calls: []
     - Name: Simple
@@ -222,7 +249,7 @@ MonoBehaviour:
       Description: It will protect, maybe
       GameObjects:
       - {fileID: 7323777149475272821}
-      Effect:
+      OnStart:
         m_PersistentCalls:
           m_Calls: []
     - Name: Armor
@@ -230,7 +257,7 @@ MonoBehaviour:
       Description: Finally something that will protect more than a mosquito bite
       GameObjects:
       - {fileID: 7323777150020117573}
-      Effect:
+      OnStart:
         m_PersistentCalls:
           m_Calls: []
   Animator: {fileID: 6530618288390507656}

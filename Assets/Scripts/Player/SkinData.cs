@@ -9,5 +9,5 @@ public class SkinData
     public Sprite Sprite;
     [TextArea] public string Description;
     public GameObject[] GameObjects;
-    public UnityEvent Effect;
+    public UnityEvent OnStart;
 }
