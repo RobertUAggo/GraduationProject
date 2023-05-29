@@ -9,15 +9,12 @@ public class Enemy : BaseCreature
     private static int DeadParam = Animator.StringToHash("Dead");
     private static int ResetParam = Animator.StringToHash("Reset");
     //
-    [SerializeField] private AnimationCurve damagePerLevel;
-    [SerializeField] private AnimationCurve healthPerLevel;
     [SerializeField] private float attackDistance = 2f;
     [SerializeField] private float attackRate = 1f;
     [SerializeField] private Animator animator;
     [SerializeField] private UnityEvent<BaseCreature> OnAttack;
     public NavMeshAgent NavAgent { private set; get; }
     private float _attackDistanceSqr;
-    private float _damage = 10;
     private void Awake()
     {
         _attackDistanceSqr = attackDistance * attackDistance;
@@ -36,12 +33,6 @@ public class Enemy : BaseCreature
     {
         yield return null;
         StartChase(Level.Instance.PlayerController.Player);
-    }
-    public void SetLevel(int level)
-    {
-        MaxHealth = healthPerLevel.Evaluate(level);
-        Health = MaxHealth;
-        _damage = damagePerLevel.Evaluate(level);
     }
     private void AfterTakeDamage(float damage)
     {
@@ -80,7 +71,7 @@ public class Enemy : BaseCreature
             {
                 OnAttack.Invoke(target);
                 animator.SetTrigger(AttackParam);
-                Level.Instance.PlayerController.Player.TakeDamage(_damage);
+                Level.Instance.PlayerController.Player.TakeDamage(Damage);
                 yield return new WaitForSeconds(attackRate);
             }
             else
