@@ -74,13 +74,24 @@ public class Enemy : BaseCreature
     }
     private IEnumerator C_AttackLogic()
     {
+        float time;
+        Vector3 toTarget;
         yield return null;
         while (IsAlive && _target != null && _target.IsAlive)
         {
-            if ((transform.position - _target.transform.position).sqrMagnitude < _attackDistanceSqr)
+            toTarget = _target.transform.position - transform.position; 
+            if (toTarget.sqrMagnitude < _attackDistanceSqr)
             {
                 animator.SetTrigger(AttackParam);
-                yield return new WaitForSeconds(attackRate);
+                time = 0;
+                while(time< attackRate)
+                {
+                    yield return null;
+                    time += Time.deltaTime;
+                    toTarget = _target.transform.position - transform.position;
+                    transform.rotation = Quaternion.LookRotation(toTarget);
+                }
+                //yield return new WaitForSeconds(attackRate);
             }
             else
             {
@@ -89,6 +100,7 @@ public class Enemy : BaseCreature
             }
         }
     }
+
     public void ApplyDamageToTarget()
     {
         _target.TakeDamage(Damage);
@@ -97,6 +109,6 @@ public class Enemy : BaseCreature
     {
         Vector3 direction = _target.transform.position - transform.position;
         direction.y = 0;
-        Level.Instance.BulletManager.Shoot(transform.position + Vector3.up, direction);
+        Level.Instance.BulletManager.Shoot(this, transform.position + Vector3.up, direction);
     }
 }

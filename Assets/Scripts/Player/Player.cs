@@ -11,6 +11,7 @@ public class Player : BaseCreature
     [SerializeField] private FillBarUI expBarUI;
     public SkinManager SkinManager;
     public Animator Animator;
+    private CapsuleCollider _capsuleCollider;
     private int _maxExp;
     private int _plusHealthPercent = 0;
     private int _plusDamagePercent = 0;
@@ -48,7 +49,6 @@ public class Player : BaseCreature
     }
     private void AfterDie()
     {
-        healthBarUI.gameObject.SetActive(false);
         Level.Instance.EndLevel();
         Animator.SetTrigger(DeadParam);
     }

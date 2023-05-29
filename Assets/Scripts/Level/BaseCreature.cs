@@ -11,7 +11,6 @@ public abstract class BaseCreature : MonoBehaviour
     public int Health { get; protected set; }
     public int Damage { get; protected set; }
     public bool IsAlive => Health != 0;
-
     public void TakeDamage(int damage)
     {
         if (Health == 0) return;
