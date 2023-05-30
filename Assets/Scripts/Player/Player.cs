@@ -7,12 +7,16 @@ public class Player : BaseCreature
     [SerializeField] private int baseHealth = 100;
     [SerializeField] private int baseDamage = 1;
     [SerializeField] private AnimationCurve maxExpPerLevel;
+    [SerializeField] private AnimationCurve baseHealthPerLevel;
+    [SerializeField] private AnimationCurve baseDamagePerLevel;
     [SerializeField] private FillBarUI healthBarUI;
     [SerializeField] private FillBarUI expBarUI;
     public SkinManager SkinManager;
     public Animator Animator;
     private CapsuleCollider _capsuleCollider;
     private int _maxExp;
+    private int _baseHealthLevel = 0;
+    private int _baseDamageLevel = 0;
     private int _plusHealthPercent = 0;
     private int _plusDamagePercent = 0;
     public float Exp { private set; get; }
@@ -60,19 +64,23 @@ public class Player : BaseCreature
     }
     public void LevelUp()
     {
+        Level.Instance.LevelUI.ChooseUpgradeUI.Show();
         CurrentLevel += 1;
         Exp -= _maxExp;
         _maxExp = (int)maxExpPerLevel.Evaluate(CurrentLevel);
+    }
+    public void AddBaseHealth()
+    {
+        _baseHealthLevel++;
+        baseHealth = (int)baseHealthPerLevel.Evaluate(_baseHealthLevel);
         MaxHealth = baseHealth + Mathf.RoundToInt(baseHealth * (_plusHealthPercent / 100f));
+        healthBarUI.Set(Health, MaxHealth);
+    }
+    public void AddBaseDamage()
+    {
+        _baseDamageLevel++;
+        baseDamage = (int)baseDamagePerLevel.Evaluate(_baseHealthLevel);
         Damage = baseDamage + Mathf.RoundToInt(baseDamage * (_plusDamagePercent / 100f));
-    }
-    public void AddBaseHealth(int addHealth)
-    {
-        baseHealth += addHealth;
-    }
-    public void AddBaseDamage(int addDamage)
-    {
-        baseDamage += addDamage;
     }
     public void AddHealthPercent(int addPercent)
     {

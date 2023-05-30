@@ -10,14 +10,6 @@ public class LoadScreenUI : BaseUI
     {
         gameObject.SetActive(false);
     }
-    public override void Show()
-    {
-        gameObject.SetActive(true);
-    }
-    public override void Hide()
-    {
-        gameObject.SetActive(false);
-    }
     public void SetProgress(float progress)
     {
         fillBarUI.Set((int)(progress * 100), 100);

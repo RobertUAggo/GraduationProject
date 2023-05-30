@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelUI : MonoBehaviour
 {
     public EndUI EndUI;
+    public ChooseUpgradeUI ChooseUpgradeUI;
     public void Init()
     {
 
