@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -12,10 +10,18 @@ public class Bullet : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out BaseCreature baseCreature))
+        if(other.gameObject == Level.Instance.PlayerController.Player.gameObject)
         {
-            baseCreature.TakeDamage(_shooter.Damage);
-            gameObject.SetActive(false);
+            Hit(Level.Instance.PlayerController.Player);
         }
+        else if (other.TryGetComponent(out BaseCreature target))
+        {
+            Hit(target);
+        }
+    }
+    private void Hit(BaseCreature target)
+    {
+        target.TakeDamage(_shooter.Damage);
+        gameObject.SetActive(false);
     }
 }
