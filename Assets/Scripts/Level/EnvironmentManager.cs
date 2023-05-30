@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnvironmentManager : MonoBehaviour
 {
-    [SerializeField] private string testName = "Name";
     [SerializeField] private NavMeshSurface navMeshSurface;
     private readonly List<EnvironmentObject> _currentObjects = new List<EnvironmentObject>();
     public Plane Plane { private set; get; }
