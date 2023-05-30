@@ -449,6 +449,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8a51c7181fd4442a4823109bf05e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerData:
+    Record: 0
+    Money: 0
+    CurrentSkin: 0
+    OwnedSkins: 0000
+    MaxFPS: 0
 --- !u!4 &554869293
 Transform:
   m_ObjectHideFlags: 0

@@ -281,7 +281,7 @@ MonoBehaviour:
   SkinManager:
     skins:
     - Name: Underpants
-      Sprite: {fileID: 0}
+      Sprite: {fileID: 21300000, guid: b32bea53d6f88f34aacaf1b84ec698c2, type: 3}
       Description: Ha-ha, realy?
       GameObjects:
       - {fileID: 7436176278172693747}
@@ -292,8 +292,8 @@ MonoBehaviour:
       OnStart:
         m_PersistentCalls:
           m_Calls: []
-    - Name: Simple
-      Sprite: {fileID: 0}
+    - Name: Casual
+      Sprite: {fileID: 21300000, guid: a7037a4713cf4af48bcde7ddfeb4f0f6, type: 3}
       Description: It will protect, maybe
       GameObjects:
       - {fileID: 7323777149475272821}
@@ -301,7 +301,7 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls: []
     - Name: Armor
-      Sprite: {fileID: 0}
+      Sprite: {fileID: 21300000, guid: d418a93b7ceb0774a803d6247d0c66a6, type: 3}
       Description: Finally something that will protect more than a mosquito bite
       GameObjects:
       - {fileID: 7323777150020117573}

@@ -9,6 +9,7 @@ public class MenuUI : MonoBehaviour
     public void Init()
     {
         SettingsUI.Init();
+        ShopUI.Init();
     }
     public void PlayClick()
     {
