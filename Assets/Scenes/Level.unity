@@ -301,11 +301,109 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196fe1a05e5eabe4ca98e91e1b5a6cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemiesTypeSettings:
+  - Capacity: 25
+    Prefab: {fileID: 4672110471263686489, guid: 2baf47ad49dba314b88bae2edb4d1d3f, type: 3}
+    LevelCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0.165
+        outSlope: 0.165
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 600
+        value: 100
+        inSlope: 0.165
+        outSlope: 0.165
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    SpawnDelayCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 4
+        inSlope: -0.0058333334
+        outSlope: -0.0058333334
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 600
+        value: 0.5
+        inSlope: -0.0058333334
+        outSlope: -0.0058333334
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+  - Capacity: 15
+    Prefab: {fileID: 4672110471263686489, guid: fd21fffcbc11a954d9f1d5658370c037, type: 3}
+    LevelCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0.165
+        outSlope: 0.165
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 600
+        value: 100
+        inSlope: 0.165
+        outSlope: 0.165
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    SpawnDelayCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 8
+        inSlope: -0.01
+        outSlope: -0.01
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 600
+        value: 2
+        inSlope: -0.01
+        outSlope: -0.01
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+  spawner: {fileID: 437529277}
   despawnDelay: 2
-  capacities: 190000000a000000
-  enemiesPrefabs:
-  - {fileID: 4672110471263686489, guid: 2baf47ad49dba314b88bae2edb4d1d3f, type: 3}
-  - {fileID: 4672110471263686489, guid: fd21fffcbc11a954d9f1d5658370c037, type: 3}
 --- !u!1 &137498042
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,7 +871,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1326220958}
   joystick: {fileID: 1748680788}
-  baseSpeed: 4
   NavAgent: {fileID: 333691342}
 --- !u!195 &333691342
 NavMeshAgent:
@@ -3157,7 +3254,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0

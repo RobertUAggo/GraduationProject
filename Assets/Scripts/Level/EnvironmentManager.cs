@@ -63,7 +63,6 @@ public class EnvironmentManager : MonoBehaviour
         Debug.Log($"Save: {path} (Objects: {_currentObjects.Count})");
         Main.Instance.SceneLoader.LevelDataFilePath = path;
         LevelSaveData levelSaveData = new LevelSaveData();
-        levelSaveData.Name = testName;
         levelSaveData.EnvironmentObjects = new EnvironmentObjectSaveData[_currentObjects.Count];
         for (int i = 0; i < levelSaveData.EnvironmentObjects.Length; i++)
         {

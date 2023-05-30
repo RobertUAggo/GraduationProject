@@ -1,28 +1,49 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemiesManager : MonoBehaviour
 {
+    [Serializable]
+    private class EnemyTypeSettings
+    {
+        public int Capacity = 25;
+        public Enemy Prefab;
+        public AnimationCurve LevelCurve;
+        public AnimationCurve SpawnDelayCurve;
+    }
+    [SerializeField] private EnemyTypeSettings[] enemiesTypeSettings;
+    [SerializeField] private BaseSpawner spawner;
     [SerializeField] private float despawnDelay = 2;
-    [SerializeField] private int[] capacities = new int[] { 25, 15, 10 };
-    [SerializeField] private Enemy[] enemiesPrefabs;
     private Pool<Enemy>[] _enemiesPool;
     public void Init()
     {
-        _enemiesPool = new Pool<Enemy>[enemiesPrefabs.Length];
+        _enemiesPool = new Pool<Enemy>[enemiesTypeSettings.Length];
         for (int i = 0; i < _enemiesPool.Length; i++)
         {
-            _enemiesPool[i] = new Pool<Enemy>(enemiesPrefabs[i],
+            _enemiesPool[i] = new Pool<Enemy>(enemiesTypeSettings[i].Prefab,
                 transform,
-                capacities.Length < i ? capacities[i] : capacities[capacities.Length - 1]);
+                enemiesTypeSettings[i].Capacity);
             _enemiesPool[i].OnCreate.AddListener(enemy => OnCreateEnemy(i, enemy));
             _enemiesPool[i].Init();
         }
     }
     private void Start()
     {
-        
+        for (int i = 0; i < enemiesTypeSettings.Length; i++)
+        {
+            StartCoroutine(C_SpawnEnemyTypeLogic(i));
+        }
+    }
+    private IEnumerator C_SpawnEnemyTypeLogic(int type)
+    {
+        while(Level.Instance.PlayerController.Player.IsAlive)
+        {
+            int level = Mathf.RoundToInt(enemiesTypeSettings[type].LevelCurve.Evaluate(Level.Instance.PlayTime));
+            yield return new WaitForSeconds(enemiesTypeSettings[type].SpawnDelayCurve.Evaluate(Level.Instance.PlayTime));
+            SpawnEnemy(type, level,spawner.GetRandPoint());
+        }
     }
 #if UNITY_EDITOR
     [ContextMenu(nameof(TestSpawnEnemy))]
