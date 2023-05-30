@@ -5,7 +5,6 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Player player;
     [SerializeField] Joystick joystick;
-    [SerializeField] private float baseSpeed = 4;
     public Player Player => player;
     public NavMeshAgent NavAgent;
     public void Init()

@@ -13,6 +13,12 @@ public class SettingsUI : BaseUI
         ChangeMaxFPS(Main.Instance.PlayerManager.PlayerData.MaxFPS);
         fpsSlider.SetValueWithoutNotify(Main.Instance.PlayerManager.PlayerData.MaxFPS);
     }
+    public override void Hide()
+    {
+        base.Hide();
+        if (_saveCor != null) Main.Instance.StopCoroutine(_saveCor);
+        Main.Instance.PlayerManager.Save();
+    }
     public void ChangeMaxFPS(float value)
     {
         int intValue = (int)value;

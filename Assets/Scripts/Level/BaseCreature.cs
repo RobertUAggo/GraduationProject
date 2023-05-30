@@ -6,7 +6,7 @@ public abstract class BaseCreature : MonoBehaviour
 {
     public readonly UnityEvent<float> OnTakeDamage = new UnityEvent<float>();
     public readonly UnityEvent OnDie = new UnityEvent();
-    public int CurrentLevel { get; set; }
+    public int CurrentLevel { get; set; } = 1;
     public int MaxHealth { get; protected set; }
     public int Health { get; protected set; }
     public int Damage { get; protected set; }

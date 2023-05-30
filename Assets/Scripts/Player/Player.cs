@@ -6,8 +6,6 @@ public class Player : BaseCreature
     public static readonly int IsMovingParam = Animator.StringToHash("IsMoving");
     private static readonly int DeadParam = Animator.StringToHash("Dead");
     [SerializeField] private float rangeAttackRate = 1f;
-    [SerializeField] private int baseHealth = 100;
-    [SerializeField] private int baseDamage = 1;
     [SerializeField] private AnimationCurve maxExpPerLevel;
     [SerializeField] private AnimationCurve baseHealthPerLevel;
     [SerializeField] private AnimationCurve baseDamagePerLevel;
@@ -18,8 +16,8 @@ public class Player : BaseCreature
     public Animator Animator;
     private CapsuleCollider _capsuleCollider;
     private int _maxExp;
-    private int _baseHealthLevel = 0;
-    private int _baseDamageLevel = 0;
+    private int _baseHealthLevel = 1;
+    private int _baseDamageLevel = 1;
     private int _plusHealthPercent = 0;
     private int _plusDamagePercent = 0;
     public float Exp { private set; get; }
@@ -29,9 +27,10 @@ public class Player : BaseCreature
         OnTakeDamage.AddListener(AfterTakeDamage);
         OnDie.AddListener(AfterDie);
         SkinManager.CurrentSkin.OnStart.Invoke();
-        MaxHealth = baseHealth + Mathf.RoundToInt(baseHealth * (_plusHealthPercent / 100f));
+        MaxHealth = Mathf.RoundToInt(baseHealthPerLevel.Evaluate(_baseHealthLevel) * (1 + (_plusHealthPercent / 100f)));
         Health = MaxHealth;
-        Damage = baseDamage + Mathf.RoundToInt(baseDamage * (_plusDamagePercent / 100f));
+        //Damage = baseDamage + Mathf.RoundToInt(baseDamage * (_plusDamagePercent / 100f));
+        Damage = Mathf.RoundToInt(baseDamagePerLevel.Evaluate(_baseDamageLevel) * (1 + (_plusDamagePercent / 100f)));
     }
     private void Start()
     {
@@ -39,7 +38,6 @@ public class Player : BaseCreature
     }
     public void ControllerStart()
     {
-        CurrentLevel = 0;
         _maxExp = (int)maxExpPerLevel.Evaluate(CurrentLevel);
         expBarUI.Set(Exp, _maxExp);
         bulletsManager.Init();
@@ -81,6 +79,7 @@ public class Player : BaseCreature
         if (Exp >= _maxExp) LevelUp();
         expBarUI.Set(Exp, _maxExp);
     }
+    [ContextMenu(nameof(LevelUp))]
     public void LevelUp()
     {
         Level.Instance.LevelUI.ChooseUpgradeUI.Show();
@@ -92,15 +91,13 @@ public class Player : BaseCreature
     public void AddBaseHealth()
     {
         _baseHealthLevel++;
-        baseHealth = (int)baseHealthPerLevel.Evaluate(_baseHealthLevel);
-        MaxHealth = baseHealth + Mathf.RoundToInt(baseHealth * (_plusHealthPercent / 100f));
+        MaxHealth = Mathf.RoundToInt(baseHealthPerLevel.Evaluate(_baseHealthLevel) * (1 + (_plusHealthPercent / 100f)));
         healthBarUI.Set(Health, MaxHealth);
     }
     public void AddBaseDamage()
     {
         _baseDamageLevel++;
-        baseDamage = (int)baseDamagePerLevel.Evaluate(_baseHealthLevel);
-        Damage = baseDamage + Mathf.RoundToInt(baseDamage * (_plusDamagePercent / 100f));
+        Damage = Mathf.RoundToInt(baseDamagePerLevel.Evaluate(_baseDamageLevel) * (1 + (_plusDamagePercent / 100f)));
         Level.Instance.LevelUI.PlayerDamageTextField.text = Damage.ToString();
     }
     public void AddHealthPercent(int addPercent)

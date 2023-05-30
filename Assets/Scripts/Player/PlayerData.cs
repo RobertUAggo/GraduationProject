@@ -1,16 +1,11 @@
-public enum UpgradeType
-{
-    Health,
-    Damage,
-    AttackRate,
-    Speed,
-}
-public struct PlayerData
+using System;
+
+[Serializable]
+public class PlayerData
 {
     public float Record;
     public int Money;
     public int CurrentSkin;
     public bool[] OwnedSkins;
-    public int[] Upgrades;
     public int MaxFPS;
 }

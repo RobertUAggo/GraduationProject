@@ -203,26 +203,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rangeAttackRate: 1
-  baseHealth: 100
-  baseDamage: 1
   maxExpPerLevel:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      time: 1
+      value: 5
+      inSlope: 50.454544
+      outSlope: 50.454544
+      tangentMode: 69
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 2
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      time: 100
+      value: 5000
+      inSlope: 50.454544
+      outSlope: 50.454544
+      tangentMode: 69
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0
@@ -233,20 +231,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 1
       value: 50
-      inSlope: 99.5
-      outSlope: 99.5
-      tangentMode: 34
+      inSlope: 49.5
+      outSlope: 50
+      tangentMode: 69
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 100
-      value: 10000
-      inSlope: 99.5
-      outSlope: 99.5
-      tangentMode: 34
+      value: 5000
+      inSlope: 50
+      outSlope: 49.5
+      tangentMode: 69
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0
@@ -257,20 +255,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 1
       value: 10
       inSlope: 1.9
-      outSlope: 1.9
-      tangentMode: 34
+      outSlope: 1.919192
+      tangentMode: 69
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 100
       value: 200
-      inSlope: 1.9
+      inSlope: 1.919192
       outSlope: 1.9
-      tangentMode: 34
+      tangentMode: 69
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0
