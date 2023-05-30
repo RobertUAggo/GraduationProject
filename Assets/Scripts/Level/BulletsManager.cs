@@ -7,6 +7,7 @@ public class BulletsManager : MonoBehaviour
     [SerializeField] private int capacity = 15;
     [SerializeField] private float lifeTime = 2;
     [SerializeField] private float speed = 1;
+    [SerializeField] private AnimationCurve curve;
     private Pool<Bullet> _pool;
     public void Init()
     {
@@ -23,17 +24,20 @@ public class BulletsManager : MonoBehaviour
         var instance = _pool.Take();
         instance.Set(shooter);
         instance.transform.position = startPos;
+        instance.transform.forward = direction;
         instance.gameObject.SetActive(true);
         StartCoroutine(C_Fly(instance, direction));
     }
     private IEnumerator C_Fly(Bullet instance, Vector3 direction)
     {
         float time = 0;
-        while(time < lifeTime && instance.gameObject.activeSelf)
+        Vector3 linePos = instance.transform.position;
+        while (time < lifeTime && instance.gameObject.activeSelf)
         {
             yield return null;
             time += Time.deltaTime;
-            instance.transform.position += direction * speed * Time.deltaTime;
+            linePos += direction * speed * Time.deltaTime;
+            instance.transform.position = linePos + instance.transform.right * curve.Evaluate(time);
         }
         instance.gameObject.SetActive(false);
         _pool.BackToQueue(instance);
