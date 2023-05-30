@@ -57,7 +57,7 @@ public class Player : BaseCreature
     {
         healthBarUI.Set(Health, MaxHealth);
         Level.Instance.FloatingDamage.Show($"-{damage}", 
-            transform.position + transform.up * 2);
+            transform.position + transform.up * 3);
     }
     private void AfterDie()
     {

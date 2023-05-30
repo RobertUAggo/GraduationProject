@@ -47,6 +47,7 @@ public class Enemy : BaseCreature
     }
     private void AfterDie()
     {
+        NavAgent.isStopped = true;
         animator.SetTrigger(DeadParam);
         Level.Instance.PlayerController.Player.TakeExp((int)expPerLevel.Evaluate(CurrentLevel));
     }
