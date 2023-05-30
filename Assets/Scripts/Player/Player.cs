@@ -37,6 +37,8 @@ public class Player : BaseCreature
         Health = MaxHealth;
         Damage = baseDamage + Mathf.RoundToInt(baseDamage * (_plusDamagePercent / 100f));
         healthBarUI.Set(Health, MaxHealth);
+        Level.Instance.LevelUI.PlayerLevelTextField.text = $"LVL {CurrentLevel}";
+        Level.Instance.LevelUI.PlayerDamageTextField.text = Damage.ToString();
     }
 #if UNITY_EDITOR
     [ContextMenu(nameof(TestTakeDamage))]
@@ -66,6 +68,7 @@ public class Player : BaseCreature
     {
         Level.Instance.LevelUI.ChooseUpgradeUI.Show();
         CurrentLevel += 1;
+        Level.Instance.LevelUI.PlayerLevelTextField.text = $"LVL {CurrentLevel}";
         Exp -= _maxExp;
         _maxExp = (int)maxExpPerLevel.Evaluate(CurrentLevel);
     }
@@ -81,6 +84,7 @@ public class Player : BaseCreature
         _baseDamageLevel++;
         baseDamage = (int)baseDamagePerLevel.Evaluate(_baseHealthLevel);
         Damage = baseDamage + Mathf.RoundToInt(baseDamage * (_plusDamagePercent / 100f));
+        Level.Instance.LevelUI.PlayerDamageTextField.text = Damage.ToString();
     }
     public void AddHealthPercent(int addPercent)
     {
