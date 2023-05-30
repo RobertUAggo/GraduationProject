@@ -1,14 +1,17 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player : BaseCreature
 {
     public static readonly int IsMovingParam = Animator.StringToHash("IsMoving");
     private static readonly int DeadParam = Animator.StringToHash("Dead");
+    [SerializeField] private float rangeAttackRate = 1f;
     [SerializeField] private int baseHealth = 100;
     [SerializeField] private int baseDamage = 1;
     [SerializeField] private AnimationCurve maxExpPerLevel;
     [SerializeField] private AnimationCurve baseHealthPerLevel;
     [SerializeField] private AnimationCurve baseDamagePerLevel;
+    [SerializeField] private BulletsManager bulletsManager;
     [SerializeField] private FillBarUI healthBarUI;
     [SerializeField] private FillBarUI expBarUI;
     public SkinManager SkinManager;
@@ -25,20 +28,25 @@ public class Player : BaseCreature
         SkinManager.SetSkin(Main.Instance.PlayerManager.PlayerData.CurrentSkin);
         OnTakeDamage.AddListener(AfterTakeDamage);
         OnDie.AddListener(AfterDie);
-        //
-        CurrentLevel = 0;
-        _maxExp = (int)maxExpPerLevel.Evaluate(CurrentLevel);
-        expBarUI.Set(Exp, _maxExp);
-    }
-    private void Start()
-    {
         SkinManager.CurrentSkin.OnStart.Invoke();
         MaxHealth = baseHealth + Mathf.RoundToInt(baseHealth * (_plusHealthPercent / 100f));
         Health = MaxHealth;
         Damage = baseDamage + Mathf.RoundToInt(baseDamage * (_plusDamagePercent / 100f));
+    }
+    private void Start()
+    {
+
+    }
+    public void ControllerStart()
+    {
+        CurrentLevel = 0;
+        _maxExp = (int)maxExpPerLevel.Evaluate(CurrentLevel);
+        expBarUI.Set(Exp, _maxExp);
+        bulletsManager.Init();
         healthBarUI.Set(Health, MaxHealth);
         Level.Instance.LevelUI.PlayerLevelTextField.text = $"LVL {CurrentLevel}";
         Level.Instance.LevelUI.PlayerDamageTextField.text = Damage.ToString();
+        StartCoroutine(C_RangeAttack());
     }
 #if UNITY_EDITOR
     [ContextMenu(nameof(TestTakeDamage))]
@@ -57,6 +65,15 @@ public class Player : BaseCreature
     {
         Level.Instance.EndLevel();
         Animator.SetTrigger(DeadParam);
+    }
+    private IEnumerator C_RangeAttack()
+    {
+        yield return new WaitForSeconds(rangeAttackRate);
+        while (IsAlive)
+        {
+            bulletsManager.Shoot(this, Mathf.RoundToInt(Damage / 2f), transform.position + Vector3.up, transform.forward);
+            yield return new WaitForSeconds(rangeAttackRate);
+        }
     }
     public void TakeExp(int addExp)
     {

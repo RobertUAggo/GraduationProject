@@ -49,7 +49,14 @@ public class EnvironmentManager : MonoBehaviour
         {
             AddObject(objData.ObjectId, objData.PositionX, objData.PositionZ, objData.RotationY);
         }
+    }
+    public void BuildNavMesh()
+    {
         navMeshSurface.BuildNavMesh();
+        foreach (var obj in _currentObjects)
+        {
+            obj.SetColliderAsTrigger();
+        }
     }
     public void Save(string path)
     {

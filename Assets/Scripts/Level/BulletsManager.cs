@@ -18,11 +18,11 @@ public class BulletsManager : MonoBehaviour
         });
         _pool.Init();
     }
-    public void Shoot(BaseCreature shooter, Vector3 startPos, Vector3 direction)
+    public void Shoot(BaseCreature shooter, int damage, Vector3 startPos, Vector3 direction)
     {
         direction.Normalize();
         var instance = _pool.Take();
-        instance.Set(shooter);
+        instance.Set(shooter, damage);
         instance.transform.position = startPos;
         instance.transform.forward = direction;
         instance.gameObject.SetActive(true);

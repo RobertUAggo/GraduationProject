@@ -3,8 +3,13 @@ using UnityEngine.EventSystems;
 
 public class EnvironmentObject : MonoBehaviour, IDragHandler
 {
+    private Collider _collider;
     public string Name;
     public Sprite Sprite;
+    private void Awake()
+    {
+        _collider = GetComponent<Collider>();
+    }
     public int ObjectId { get; set; }
     //
     private Ray GetRay(Vector2 screenPos)
@@ -29,6 +34,9 @@ public class EnvironmentObject : MonoBehaviour, IDragHandler
                 transform.Rotate(0, eventData.delta.x / Main.Instance.MainUI.Canvas.scaleFactor, 0);
                 break;
         }
-        
+    }
+    public void SetColliderAsTrigger()
+    {
+        _collider.isTrigger = true;
     }
 }

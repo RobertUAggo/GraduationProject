@@ -12,6 +12,7 @@ public class Level : MonoSingleton<Level>
     {
         SingletonInit();
         EnvironmentManager.Init();
+        EnvironmentManager.BuildNavMesh();
         BulletManager.Init();
         EnemiesManager.Init();
         PlayerController.Init();

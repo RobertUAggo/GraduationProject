@@ -109,6 +109,6 @@ public class Enemy : BaseCreature
     {
         Vector3 direction = _target.transform.position - transform.position;
         direction.y = 0;
-        Level.Instance.BulletManager.Shoot(this, transform.position + Vector3.up, direction);
+        Level.Instance.BulletManager.Shoot(this, Damage, transform.position + Vector3.up, direction);
     }
 }

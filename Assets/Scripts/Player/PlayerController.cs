@@ -12,6 +12,10 @@ public class PlayerController : MonoBehaviour
     {
         
     }
+    private void Start()
+    {
+        Player.ControllerStart();
+    }
     private void Update()
     {
         if (joystick.Direction3D != Vector3.zero)

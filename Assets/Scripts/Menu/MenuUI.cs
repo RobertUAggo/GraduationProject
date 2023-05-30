@@ -8,7 +8,7 @@ public class MenuUI : MonoBehaviour
     public SettingsUI SettingsUI;
     public void Init()
     {
-
+        SettingsUI.Init();
     }
     public void PlayClick()
     {

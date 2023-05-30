@@ -1,27 +1,27 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Bullet : MonoBehaviour
 {
     private BaseCreature _shooter;
-    public void Set(BaseCreature shooter)
+    private int _damage;
+    public void Set(BaseCreature shooter, int damage)
     {
         _shooter = shooter;
-        gameObject.layer = _shooter.gameObject.layer;
+        _damage = damage;
+        //gameObject.layer = _shooter.gameObject.layer;
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject == Level.Instance.PlayerController.Player.gameObject)
+        GameObject go = other.gameObject;
+        if(go == Level.Instance.PlayerController.Player.gameObject)
         {
-            Hit(Level.Instance.PlayerController.Player);
+            Level.Instance.PlayerController.Player.TakeDamage(_damage);
         }
-        else if (other.TryGetComponent(out BaseCreature target))
+        else if (go.TryGetComponent(out BaseCreature target))
         {
-            Hit(target);
+            target.TakeDamage(_damage);
         }
-    }
-    private void Hit(BaseCreature target)
-    {
-        target.TakeDamage(_shooter.Damage);
         gameObject.SetActive(false);
     }
 }

@@ -202,6 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66be0fd467ee75f4a83131fd0480f997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rangeAttackRate: 1
   baseHealth: 100
   baseDamage: 1
   maxExpPerLevel:
@@ -257,9 +258,9 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
-      inSlope: 1.99
-      outSlope: 1.99
+      value: 10
+      inSlope: 1.9
+      outSlope: 1.9
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
@@ -267,8 +268,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 100
       value: 200
-      inSlope: 1.99
-      outSlope: 1.99
+      inSlope: 1.9
+      outSlope: 1.9
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -276,6 +277,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  bulletsManager: {fileID: 0}
   healthBarUI: {fileID: 0}
   expBarUI: {fileID: 0}
   SkinManager:

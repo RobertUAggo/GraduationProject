@@ -12,4 +12,5 @@ public struct PlayerData
     public int CurrentSkin;
     public bool[] OwnedSkins;
     public int[] Upgrades;
+    public int MaxFPS;
 }
