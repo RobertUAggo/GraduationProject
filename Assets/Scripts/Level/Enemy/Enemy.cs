@@ -57,6 +57,7 @@ public class Enemy : BaseCreature
         Level.Instance.PlayerController.Player.TakeExp((int)expPerLevel.Evaluate(CurrentLevel));
         int moneyReward = Mathf.RoundToInt(moneyPerLevel.Evaluate(CurrentLevel));
         Level.Instance.FloatingMoneyReward.Show($"+{moneyReward}<sprite=0>", transform.position + transform.up * 1.5f);
+        Main.Instance.PlayerManager.ChangeMoney(moneyReward);
     }
     public void RotateTowards(BaseCreature target)
     {
