@@ -11,7 +11,7 @@ public class RootSpawner : BaseSpawner
         public float Weight;
     }
     [SerializeField] private SpawnerWeight[] childSpawnersWeights;
-    public override Vector3 GetRandPoint()
+    public override Vector3 GetPoint()
     {
         float sum = childSpawnersWeights.Sum(x => x.Weight);
         float rand = UnityEngine.Random.value * sum;
@@ -19,8 +19,8 @@ public class RootSpawner : BaseSpawner
         for (int i = 0; i < childSpawnersWeights.Length; i++)
         {
             sum += childSpawnersWeights[i].Weight;
-            if (sum >= rand) return childSpawnersWeights[i].Spawner.GetRandPoint();
+            if (sum >= rand) return childSpawnersWeights[i].Spawner.GetPoint();
         }
-        return childSpawnersWeights[childSpawnersWeights.Length - 1].Spawner.GetRandPoint();
+        return childSpawnersWeights[childSpawnersWeights.Length - 1].Spawner.GetPoint();
     }
 }
