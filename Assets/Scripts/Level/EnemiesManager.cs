@@ -2,19 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemiesManager : MonoBehaviour
 {
     [Serializable]
     private class EnemyTypeSettings
     {
-        public int Capacity = 25;
-        public Enemy Prefab;
-        public AnimationCurve LevelCurve;
-        public AnimationCurve SpawnDelayCurve;
+        [SerializeField] public int Capacity = 25;
+        [SerializeField] public Enemy Prefab;
+        [SerializeField] public AnimationCurve LevelCurve;
+        [SerializeField] public AnimationCurve SpawnDelayCurve;
     }
     [SerializeField] private EnemyTypeSettings[] enemiesTypeSettings;
     [SerializeField] private BaseSpawner spawner;
+    [SerializeField] private float maxDistWarp = 2;
     [SerializeField] private float despawnDelay = 2;
     private Pool<Enemy>[] _enemiesPool;
     public void Init()
@@ -42,7 +44,14 @@ public class EnemiesManager : MonoBehaviour
         {
             int level = Mathf.RoundToInt(enemiesTypeSettings[type].LevelCurve.Evaluate(Level.Instance.PlayTime));
             yield return new WaitForSeconds(enemiesTypeSettings[type].SpawnDelayCurve.Evaluate(Level.Instance.PlayTime));
-            SpawnEnemy(type, level,spawner.GetRandPoint());
+            Vector3 randPoint = spawner.GetRandPoint();
+            NavMeshHit hit;
+            while (NavMesh.SamplePosition(randPoint, out hit, maxDistWarp, NavMesh.AllAreas) == false)
+            {
+                randPoint = spawner.GetRandPoint();
+            }
+            randPoint = hit.position;
+            SpawnEnemy(type, level, randPoint);
         }
     }
 #if UNITY_EDITOR
@@ -52,7 +61,7 @@ public class EnemiesManager : MonoBehaviour
         SpawnEnemy(1, 0, Vector3.zero);
     }
 #endif
-    public void SpawnEnemy(int type, int level, Vector3 position)
+    public Enemy SpawnEnemy(int type, int level, Vector3 position)
     {
         var newInstance = _enemiesPool[type].Take();
         newInstance.transform.position = position;
@@ -60,6 +69,7 @@ public class EnemiesManager : MonoBehaviour
         newInstance.gameObject.SetActive(true);
         newInstance.OnDie.AddListener(() => DespawnEnemy(type, newInstance));
         newInstance.Init(level);
+        return newInstance;
     }
     private void DespawnEnemy(int type, Enemy instance)
     {
