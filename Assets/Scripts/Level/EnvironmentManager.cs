@@ -11,7 +11,17 @@ public class EnvironmentManager : MonoBehaviour
     {
         Plane = new Plane(transform.up, transform.position.y);
         if (Main.Instance.SceneLoader.LevelDataFilePath.Length != 0)
-            Load(Main.Instance.SceneLoader.LevelDataFilePath);
+        {
+            try
+            {
+                Load(Main.Instance.SceneLoader.LevelDataFilePath);
+            }
+            catch
+            {
+                Main.Instance.SceneLoader.LevelDataFilePath = "";
+                Debug.LogError($"Trying to load bad file");
+            }
+        }
     }
     public EnvironmentObject AddObject(int objectId, float positionX, float positionZ, float rotationY)
     {
@@ -32,7 +42,7 @@ public class EnvironmentManager : MonoBehaviour
     public void Load(string path)
     {
         Main.Instance.SceneLoader.LevelDataFilePath = path;
-        LevelSaveData levelSaveData = SaveLoadSystem.Load<LevelSaveData>(path, SerializeType.JSON);
+        LevelSaveData levelSaveData = SaveLoadSystem.Load<LevelSaveData>(path);
         Load(levelSaveData);
         Debug.Log($"Load: {path} (Objects: {_currentObjects.Count})");
     }
@@ -67,7 +77,7 @@ public class EnvironmentManager : MonoBehaviour
                 RotationY = _currentObjects[i].transform.rotation.eulerAngles.y,
             };
         }
-        SaveLoadSystem.Save(levelSaveData, path, SerializeType.JSON);
+        SaveLoadSystem.Save(levelSaveData, path);
     }
     public void Save()
     {

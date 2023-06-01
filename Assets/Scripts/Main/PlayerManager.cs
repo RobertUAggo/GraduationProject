@@ -11,7 +11,7 @@ public class PlayerManager : MonoBehaviour
     public void Init()
     {
         _targetPath = Path.Combine(Application.persistentDataPath, c_saveFileName);
-        PlayerData = SaveLoadSystem.Load<PlayerData>(_targetPath, SerializeType.JSON);
+        PlayerData = SaveLoadSystem.Load<PlayerData>(_targetPath);
     }
     public void ChangeMoney(int value)
     {
@@ -22,6 +22,6 @@ public class PlayerManager : MonoBehaviour
     [ContextMenu(nameof(Save))]
     public void Save()
     {
-        SaveLoadSystem.Save(PlayerData, _targetPath, SerializeType.JSON);
+        SaveLoadSystem.Save(PlayerData, _targetPath);
     }
 }

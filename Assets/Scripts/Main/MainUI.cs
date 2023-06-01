@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using SimpleFileBrowser;
 
 public class MainUI : MonoBehaviour
 {
@@ -8,6 +7,13 @@ public class MainUI : MonoBehaviour
     public Canvas Canvas { get; private set; }
     public void Init()
     {
+        FileBrowser.SetFilters(false, new FileBrowser.Filter("JSON", ".json"));
+        //FileBrowser.DisplayedEntriesFilter += (entry) =>
+        //{
+        //    if (entry.IsDirectory)
+        //        return true;
+        //    return entry.Extension == ".json";
+        //};
         Canvas = GetComponent<Canvas>();
         LoadScreenUI.Init();
     }

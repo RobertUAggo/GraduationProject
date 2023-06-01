@@ -60,6 +60,8 @@ public class CreatorUI : MonoBehaviour
                 Creator.Instance.EnvironmentManager.Save();
             },
             () => FileBrowser.HideDialog(),
-            FileBrowser.PickMode.Files);
+            FileBrowser.PickMode.Files,
+            initialFilename: "NewLevel",
+            title: "Create new level");
     }
 }

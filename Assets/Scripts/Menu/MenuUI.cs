@@ -10,12 +10,25 @@ public class MenuUI : MonoBehaviour
         SettingsUI.Init();
         ShopUI.Init();
     }
-    public void PlayClick()
+    public void PlaySimpleClick()
     {
+        Main.Instance.SceneLoader.LevelDataFilePath = "";
         Main.Instance.SceneLoader.LoadScene(GameScene.Level);
+    }
+    public void PlayCustomClick()
+    {
+        FileBrowser.ShowLoadDialog(success =>
+        {
+            Main.Instance.SceneLoader.LevelDataFilePath = success[0];
+            Main.Instance.SceneLoader.LoadScene(GameScene.Level);
+        },
+        () => FileBrowser.HideDialog(),
+        FileBrowser.PickMode.Files,
+        title: "Select level level to load");
     }
     public void CreatorNewClick()
     {
+        Main.Instance.SceneLoader.LevelDataFilePath = "";
         Main.Instance.SceneLoader.LoadScene(GameScene.Creator);
     }
     public void CreatorOpenClick()
@@ -26,6 +39,7 @@ public class MenuUI : MonoBehaviour
             Main.Instance.SceneLoader.LoadScene(GameScene.Creator);
         },
         () => FileBrowser.HideDialog(),
-        FileBrowser.PickMode.Files);
+        FileBrowser.PickMode.Files,
+        title: "Select level level to load");
     }
 }

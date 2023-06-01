@@ -15,42 +15,13 @@ public class TestData
 
 public class Testing : MonoBehaviour
 {
-    [SerializeField] private SerializeType serializeType;
     [SerializeField] private TestData[] testDataArray;
     private string path;
     //private SaveLoadData<int[]> TestFile = new SaveLoadData<int[]>();
     //private int[][] testField2 = new int[][] { new int[] { 1, 2, 3 }, new int[] { 1, 2, 3 }, new int[] { 1, 2, 3 } };
     private void SetPath()
     {
-        path = Path.Combine(Application.persistentDataPath, "test");
-        switch (serializeType)
-        {
-            case SerializeType.JSON:
-                path += ".json";
-                break;
-            case SerializeType.XML:
-                path += ".xml";
-                break;
-        }
-    }
-
-    [ContextMenu(nameof(TestSave))]
-    private void TestSave()
-    {
-        SetPath();
-        CheckTime($"{serializeType} SaveTime", () =>
-        {
-            SaveLoadSystem.Save(testDataArray, path, serializeType);
-        });
-    }
-    [ContextMenu(nameof(TestLoad))]
-    private void TestLoad()
-    {
-        SetPath();
-        CheckTime($"{serializeType} LoadTime", () =>
-        {
-            testDataArray = SaveLoadSystem.Load<TestData[]>(path, serializeType);
-        });
+        path = Path.Combine(Application.persistentDataPath, "test.json");
     }
 
 #if UNITY_EDITOR

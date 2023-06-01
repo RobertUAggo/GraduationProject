@@ -402,7 +402,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
-  spawner: {fileID: 437529277}
+  circleSpawner: {fileID: 437529277}
+  randStep: 0.1
+  maxDistWarp: 2
   despawnDelay: 2
 --- !u!1 &137498042
 GameObject:
@@ -2197,7 +2199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f2b33eccdf8acd4d973cedb5ecebb88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testName: Name
   navMeshSurface: {fileID: 796133192}
 --- !u!1 &1298929312
 GameObject:
