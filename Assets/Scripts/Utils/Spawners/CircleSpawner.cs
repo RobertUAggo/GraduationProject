@@ -5,10 +5,15 @@ public class CircleSpawner : BaseSpawner
     [SerializeField] private float radius = 15;
     [SerializeField, Range(0, 360)] private float minAngle;
     [SerializeField, Range(0, 360)] private float maxAngle;
-    public override Vector3 GetRandPoint()
+    public override Vector3 GetPoint()
     {
-        float randAngle = minAngle + Random.value * (maxAngle - minAngle);
-        return transform.position + GetPosInCircle(radius, randAngle);
+        return GetRelativePoint(Random.value);
+    }
+    /// <param name="relativeValue"> from 0 to 1</param>
+    public Vector3 GetRelativePoint(float relativeValue)
+    {
+        float angle = minAngle + relativeValue * (maxAngle - minAngle);
+        return transform.position + GetPosInCircle(radius, angle);
     }
     private Vector3 GetPosInCircle(float radius, float angle)
     {

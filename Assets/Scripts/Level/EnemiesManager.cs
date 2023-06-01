@@ -15,7 +15,8 @@ public class EnemiesManager : MonoBehaviour
         [SerializeField] public AnimationCurve SpawnDelayCurve;
     }
     [SerializeField] private EnemyTypeSettings[] enemiesTypeSettings;
-    [SerializeField] private BaseSpawner spawner;
+    [SerializeField] private CircleSpawner circleSpawner;
+    [SerializeField] private float randStep = 0.1f;
     [SerializeField] private float maxDistWarp = 2;
     [SerializeField] private float despawnDelay = 2;
     private Pool<Enemy>[] _enemiesPool;
@@ -44,11 +45,15 @@ public class EnemiesManager : MonoBehaviour
         {
             int level = Mathf.RoundToInt(enemiesTypeSettings[type].LevelCurve.Evaluate(Level.Instance.PlayTime));
             yield return new WaitForSeconds(enemiesTypeSettings[type].SpawnDelayCurve.Evaluate(Level.Instance.PlayTime));
-            Vector3 randPoint = spawner.GetRandPoint();
+            float startRand = UnityEngine.Random.value;
+            float newRand = 0;
+            Vector3 randPoint = circleSpawner.GetRelativePoint(startRand);
             NavMeshHit hit;
-            while (NavMesh.SamplePosition(randPoint, out hit, maxDistWarp, NavMesh.AllAreas) == false)
+            while (NavMesh.SamplePosition(randPoint, out hit, maxDistWarp, NavMesh.AllAreas) == false
+                && newRand < 1)
             {
-                randPoint = spawner.GetRandPoint();
+                newRand += randStep;
+                randPoint = circleSpawner.GetRelativePoint(startRand+newRand);
             }
             randPoint = hit.position;
             SpawnEnemy(type, level, randPoint);
