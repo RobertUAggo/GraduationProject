@@ -9,15 +9,9 @@ public class EnvironmentManager : MonoBehaviour
     public Plane Plane { private set; get; }
     public void Init()
     {
-#if UNITY_EDITOR
-        if(Main.Instance.SceneLoader.LevelDataFilePath.Length == 0)
-        {
-            Main.Instance.SceneLoader.LevelDataFilePath = 
-                Application.persistentDataPath + "\\" + "default.json";
-        }
-#endif
         Plane = new Plane(transform.up, transform.position.y);
-        Load(Main.Instance.SceneLoader.LevelDataFilePath);
+        if (Main.Instance.SceneLoader.LevelDataFilePath.Length != 0)
+            Load(Main.Instance.SceneLoader.LevelDataFilePath);
     }
     public EnvironmentObject AddObject(int objectId, float positionX, float positionZ, float rotationY)
     {

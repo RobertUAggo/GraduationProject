@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using SimpleFileBrowser;
 
 public class MenuUI : MonoBehaviour
 {
@@ -15,8 +14,18 @@ public class MenuUI : MonoBehaviour
     {
         Main.Instance.SceneLoader.LoadScene(GameScene.Level);
     }
-    public void CreatorClick()
+    public void CreatorNewClick()
     {
         Main.Instance.SceneLoader.LoadScene(GameScene.Creator);
+    }
+    public void CreatorOpenClick()
+    {
+        FileBrowser.ShowLoadDialog(success =>
+        {
+            Main.Instance.SceneLoader.LevelDataFilePath = success[0];
+            Main.Instance.SceneLoader.LoadScene(GameScene.Creator);
+        },
+        () => FileBrowser.HideDialog(),
+        FileBrowser.PickMode.Files);
     }
 }

@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using SimpleFileBrowser;
 
 public enum CreatorMode
 {
@@ -40,10 +41,25 @@ public class CreatorUI : MonoBehaviour
     }
     public void SaveClick()
     {
-        Creator.Instance.EnvironmentManager.Save();
+        if (Main.Instance.SceneLoader.LevelDataFilePath.Length == 0)
+        {
+            SaveAsClick();
+        }
+        else
+        {
+            Creator.Instance.EnvironmentManager.Save();
+        }
     }
     public void SaveAsClick()
     {
-
+        FileBrowser.ShowSaveDialog(
+            succes =>
+            {
+                Main.Instance.SceneLoader.LevelDataFilePath = succes[0];
+                Debug.Log($"new LevelDataFilePath = {Main.Instance.SceneLoader.LevelDataFilePath}");
+                Creator.Instance.EnvironmentManager.Save();
+            },
+            () => FileBrowser.HideDialog(),
+            FileBrowser.PickMode.Files);
     }
 }
