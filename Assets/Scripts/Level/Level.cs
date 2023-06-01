@@ -44,5 +44,6 @@ public class Level : MonoSingleton<Level>
     {
         LevelUI.EndUI.Show();
         PlayerController.Disable();
+        Main.Instance.PlayerManager.Save();
     }
 }
