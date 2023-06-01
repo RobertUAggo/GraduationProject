@@ -31,6 +31,7 @@ public class EnvironmentManager : MonoBehaviour
             resultPos,
             resultRot,
             transform);
+        newObject.ObjectId = objectId;
         _currentObjects.Add(newObject);
         return newObject;
     }

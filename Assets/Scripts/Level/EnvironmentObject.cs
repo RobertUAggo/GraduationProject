@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class EnvironmentObject : MonoBehaviour, IDragHandler
+public class EnvironmentObject : MonoBehaviour, IDragHandler, IPointerClickHandler
 {
     private Collider _collider;
     public string Name;
@@ -38,5 +38,15 @@ public class EnvironmentObject : MonoBehaviour, IDragHandler
     public void SetColliderAsTrigger()
     {
         _collider.isTrigger = true;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        switch (Creator.Instance.Mode)
+        {
+            case CreatorMode.Removing:
+                Creator.Instance.EnvironmentManager.RemoveObject(this);
+                break;
+        }
     }
 }

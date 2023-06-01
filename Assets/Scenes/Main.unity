@@ -740,7 +740,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b921cb0e5c774c148b41c5073682f5a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializeType: 0
   testDataArray:
   - name: test1
     values:
@@ -854,6 +853,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnvironmentObjects:
   - {fileID: 3351560544338822328, guid: 9f07190b45721d545bb2fb70f0ce6850, type: 3}
+  - {fileID: 610443539351513480, guid: c2fe94b4ba295aa4691e8e6a64ceb87f, type: 3}
+  - {fileID: 5245400479306849461, guid: bd031bfa4889f2b47b7d94af46cb1f10, type: 3}
+  - {fileID: 714844330239422489, guid: 498d1c2c41645ca4d8f7d3fdc578f7ef, type: 3}
 --- !u!1 &924560958
 GameObject:
   m_ObjectHideFlags: 0

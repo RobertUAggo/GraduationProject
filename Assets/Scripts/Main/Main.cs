@@ -13,6 +13,7 @@ public class Main : MonoSingleton<Main>
     private void Awake()
     {
         SingletonInit();
+        ItemsManager.Init();
         PlayerManager.Init();
         MainUI.Init();
         SceneLoader.Init();

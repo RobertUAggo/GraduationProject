@@ -486,7 +486,7 @@ Transform:
   m_Children:
   - {fileID: 427204413}
   m_Father: {fileID: 758216532}
-  m_RootOrder: 71
+  m_RootOrder: 67
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &176673826
 BoxCollider:
@@ -2790,11 +2790,11 @@ Transform:
   - {fileID: 7140895295063882855}
   - {fileID: 1452294239}
   - {fileID: 589046667}
+  - {fileID: 176673825}
   - {fileID: 528605222702135545}
   - {fileID: 543450652338012546}
   - {fileID: 1002198135206733493}
   - {fileID: 6325095373601245933}
-  - {fileID: 176673825}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

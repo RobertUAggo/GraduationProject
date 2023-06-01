@@ -7,6 +7,8 @@ public enum CreatorMode
     Camera,
     Position,
     Rotation,
+    Removing,
+    End
 }
 
 public class CreatorUI : MonoBehaviour
@@ -23,7 +25,7 @@ public class CreatorUI : MonoBehaviour
     public void SwitchModeClick()
     {
         Creator.Instance.Mode++;
-        if(Creator.Instance.Mode > CreatorMode.Rotation)
+        if(Creator.Instance.Mode == CreatorMode.End)
         {
             Creator.Instance.Mode = 0;
         }

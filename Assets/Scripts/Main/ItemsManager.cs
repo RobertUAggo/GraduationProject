@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemsManager : MonoBehaviour
 {
     public EnvironmentObject[] EnvironmentObjects;
-    private void Awake()
+    public void Init()
     {
         for (int i = 0; i < EnvironmentObjects.Length; i++)
         {

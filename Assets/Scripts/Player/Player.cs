@@ -5,7 +5,9 @@ public class Player : BaseCreature
 {
     public static readonly int IsMovingParam = Animator.StringToHash("IsMoving");
     private static readonly int DeadParam = Animator.StringToHash("Dead");
+    [SerializeField] private Vector2 handAttackRange = new Vector2(2,2);
     [SerializeField] private float rangeAttackRate = 1f;
+    [SerializeField] private Transform[] rangeAttackTransforms;
     [SerializeField] private AnimationCurve maxExpPerLevel;
     [SerializeField] private AnimationCurve baseHealthPerLevel;
     [SerializeField] private AnimationCurve baseDamagePerLevel;
@@ -38,6 +40,7 @@ public class Player : BaseCreature
     }
     public void ControllerStart()
     {
+        Animator.SetLayerWeight(1, 1);
         _maxExp = (int)maxExpPerLevel.Evaluate(CurrentLevel);
         expBarUI.Set(Exp, _maxExp);
         bulletsManager.Init();
@@ -61,6 +64,7 @@ public class Player : BaseCreature
     }
     private void AfterDie()
     {
+        healthBarUI.Set(Health, MaxHealth);
         Level.Instance.EndLevel();
         Animator.SetTrigger(DeadParam);
     }
@@ -69,7 +73,13 @@ public class Player : BaseCreature
         yield return new WaitForSeconds(rangeAttackRate);
         while (IsAlive)
         {
-            bulletsManager.Shoot(this, Mathf.RoundToInt(Damage / 2f), transform.position + Vector3.up, transform.forward);
+            for (int i = 0; i < rangeAttackTransforms.Length; i++)
+            {
+                bulletsManager.Shoot(this, 
+                    Mathf.RoundToInt(Damage / 2f), 
+                    rangeAttackTransforms[i].position,
+                    rangeAttackTransforms[i].forward);
+            }
             yield return new WaitForSeconds(rangeAttackRate);
         }
     }
@@ -107,5 +117,43 @@ public class Player : BaseCreature
     public void AddDamagePercent(int addPercent)
     {
         _plusDamagePercent += addPercent;
+    }
+    public void HandAttack()
+    {
+        Collider[] colliders = Physics.OverlapBox(transform.position + transform.forward * handAttackRange.y,
+            new Vector3(handAttackRange.x, 2, handAttackRange.y),
+            transform.rotation, 
+            1 << LayersManager.Enemy, 
+            QueryTriggerInteraction.Collide);
+        foreach (var collider in colliders)
+        {
+            if (collider.CompareTag("Bullet")) continue;
+            //Debug.Log($"collider: {collider.gameObject.name}");
+            Vector3 toCollider = collider.transform.position - transform.position;
+            Ray ray = new Ray(transform.position + Vector3.up * 0.5f, toCollider);
+            if (Physics.Raycast(ray, 
+                toCollider.magnitude, 
+                1 << LayersManager.EnvironmentObject,
+                QueryTriggerInteraction.Collide) == false)
+            {
+                Enemy enemy = collider.GetComponent<Enemy>();
+                enemy.TakeDamage(Damage);
+                Debug.DrawRay(ray.origin, toCollider, Color.green, 2f);
+            }
+            else
+            {
+                Debug.DrawRay(ray.origin, toCollider, Color.red, 2f);
+            }
+        }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireCube(transform.position + transform.forward * handAttackRange.y,
+            new Vector3(handAttackRange.x, 2, handAttackRange.y) * 2);
+        for (int i = 0; i < rangeAttackTransforms.Length; i++)
+        {
+            Gizmos.DrawLine(rangeAttackTransforms[i].position,
+                rangeAttackTransforms[i].position + rangeAttackTransforms[i].forward * 3);
+        }
     }
 }

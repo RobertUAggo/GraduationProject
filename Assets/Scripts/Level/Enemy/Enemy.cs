@@ -12,15 +12,18 @@ public class Enemy : BaseCreature
     //
     [SerializeField] private AnimationCurve damagePerLevel;
     [SerializeField] private AnimationCurve healthPerLevel;
-    [SerializeField] private AnimationCurve expPerLevel; 
+    [SerializeField] private AnimationCurve expPerLevel;
+    [SerializeField] private AnimationCurve moneyPerLevel;
     [SerializeField] private float attackDistance = 2f;
     [SerializeField] private float attackRate = 1f;
     [SerializeField] private Animator animator;
     public NavMeshAgent NavAgent { private set; get; }
     private float _attackDistanceSqr;
+    private Collider _collider;
     private BaseCreature _target;
     private void Awake()
     {
+        _collider = GetComponent<Collider>();
         _attackDistanceSqr = attackDistance * attackDistance;
         NavAgent = GetComponent<NavMeshAgent>();
         OnTakeDamage.AddListener(AfterTakeDamage);
@@ -33,6 +36,7 @@ public class Enemy : BaseCreature
         Health = MaxHealth;
         Damage = (int)damagePerLevel.Evaluate(CurrentLevel);
         animator.SetTrigger(ResetParam);
+        _collider.enabled = true;
         StartCoroutine(C_ChaseDelay());
     }
     private IEnumerator C_ChaseDelay()
@@ -43,13 +47,16 @@ public class Enemy : BaseCreature
     private void AfterTakeDamage(float damage)
     {
         Level.Instance.FloatingDamage.Show($"-{damage}",
-            transform.position + transform.up * 1);
+            transform.position + transform.up * 0.75f);
     }
     private void AfterDie()
     {
+        _collider.enabled = false;
         NavAgent.isStopped = true;
         animator.SetTrigger(DeadParam);
         Level.Instance.PlayerController.Player.TakeExp((int)expPerLevel.Evaluate(CurrentLevel));
+        int moneyReward = Mathf.RoundToInt(moneyPerLevel.Evaluate(CurrentLevel));
+        Level.Instance.FloatingMoneyReward.Show($"+{moneyReward}<sprite=0>", transform.position + transform.up * 1.5f);
     }
     public void RotateTowards(BaseCreature target)
     {

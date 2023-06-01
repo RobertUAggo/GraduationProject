@@ -9,6 +9,7 @@ public class Level : MonoSingleton<Level>
     public BulletsManager BulletManager;
     public EnvironmentManager EnvironmentManager;
     public FloatingTextManager FloatingDamage;
+    public FloatingTextManager FloatingMoneyReward;
     public float PlayTime { get; private set; }
     private void Awake()
     {
@@ -19,6 +20,7 @@ public class Level : MonoSingleton<Level>
         EnemiesManager.Init();
         PlayerController.Init();
         FloatingDamage.Init();
+        FloatingMoneyReward.Init();
         LevelUI.Init();
 
 #if UNITY_EDITOR
