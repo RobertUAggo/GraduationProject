@@ -5,6 +5,7 @@ public class Player : BaseCreature
 {
     public static readonly int IsMovingParam = Animator.StringToHash("IsMoving");
     private static readonly int DeadParam = Animator.StringToHash("Dead");
+    [SerializeField] private float healthRegenTime = 2f;
     [SerializeField] private Vector2 handAttackRange = new Vector2(2,2);
     [SerializeField] private ParticleSystem handParticle;
     [SerializeField] private float rangeAttackRate = 1f;
@@ -49,6 +50,7 @@ public class Player : BaseCreature
         Level.Instance.LevelUI.PlayerLevelTextField.text = $"LVL {CurrentLevel}";
         Level.Instance.LevelUI.PlayerDamageTextField.text = Damage.ToString();
         StartCoroutine(C_RangeAttack());
+        StartCoroutine(C_HealthRegen());
     }
 #if UNITY_EDITOR
     [ContextMenu(nameof(TestTakeDamage))]
@@ -69,6 +71,18 @@ public class Player : BaseCreature
         healthBarUI.Set(Health, MaxHealth);
         Level.Instance.EndLevel();
         Animator.SetTrigger(DeadParam);
+    }
+    private IEnumerator C_HealthRegen()
+    {
+        while (IsAlive)
+        {
+            yield return new WaitForSeconds(healthRegenTime);
+            if (Health < MaxHealth)
+            {
+                Health += 1;
+                healthBarUI.Set(Health, MaxHealth);
+            }
+        }
     }
     private IEnumerator C_RangeAttack()
     {

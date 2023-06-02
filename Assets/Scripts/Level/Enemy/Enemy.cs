@@ -109,6 +109,7 @@ public class Enemy : BaseCreature
                 yield return new WaitForFixedUpdate();
             }
         }
+        animator.ResetTrigger(AttackParam);
     }
 
     public void ApplyDamageToTarget()
