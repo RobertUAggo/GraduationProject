@@ -84,7 +84,6 @@ public class EnemiesManager : MonoBehaviour
     {
         yield return new WaitForSeconds(despawnDelay);
         instance.gameObject.SetActive(false);
-        instance.NavAgent.enabled = false;
         _enemiesPool[type].BackToQueue(instance);
     }
     private void OnCreateEnemy(int type, Enemy instance)

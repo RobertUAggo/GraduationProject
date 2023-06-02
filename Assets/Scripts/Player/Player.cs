@@ -64,6 +64,7 @@ public class Player : BaseCreature
     }
     private void AfterDie()
     {
+        Animator.SetLayerWeight(1, 0);
         healthBarUI.Set(Health, MaxHealth);
         Level.Instance.EndLevel();
         Animator.SetTrigger(DeadParam);

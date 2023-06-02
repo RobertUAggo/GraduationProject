@@ -51,8 +51,10 @@ public class Enemy : BaseCreature
     }
     private void AfterDie()
     {
+        StopAllCoroutines();
         _collider.enabled = false;
-        NavAgent.isStopped = true;
+        NavAgent.enabled = false;
+        animator.SetBool(IsMovingParam, false);
         animator.SetTrigger(DeadParam);
         Level.Instance.PlayerController.Player.TakeExp((int)expPerLevel.Evaluate(CurrentLevel));
         int moneyReward = Mathf.RoundToInt(moneyPerLevel.Evaluate(CurrentLevel));
@@ -79,7 +81,6 @@ public class Enemy : BaseCreature
             NavAgent.SetDestination(_target.transform.position);
             yield return new WaitForFixedUpdate();
         }
-        animator.SetBool(IsMovingParam, false);
     }
     private IEnumerator C_AttackLogic()
     {
@@ -116,6 +117,7 @@ public class Enemy : BaseCreature
     }
     public void RangeAttack()
     {
+        if (IsAlive == false) return;
         Vector3 direction = _target.transform.position - transform.position;
         direction.y = 0;
         Level.Instance.BulletManager.Shoot(this, Damage, transform.position + Vector3.up, direction);
