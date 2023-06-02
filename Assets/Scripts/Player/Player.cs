@@ -6,6 +6,7 @@ public class Player : BaseCreature
     public static readonly int IsMovingParam = Animator.StringToHash("IsMoving");
     private static readonly int DeadParam = Animator.StringToHash("Dead");
     [SerializeField] private Vector2 handAttackRange = new Vector2(2,2);
+    [SerializeField] private ParticleSystem handParticle;
     [SerializeField] private float rangeAttackRate = 1f;
     [SerializeField] private Transform[] rangeAttackTransforms;
     [SerializeField] private AnimationCurve maxExpPerLevel;
@@ -121,6 +122,7 @@ public class Player : BaseCreature
     }
     public void HandAttack()
     {
+        handParticle.Play();
         Collider[] colliders = Physics.OverlapBox(transform.position + transform.forward * handAttackRange.y,
             new Vector3(handAttackRange.x, 2, handAttackRange.y),
             transform.rotation, 

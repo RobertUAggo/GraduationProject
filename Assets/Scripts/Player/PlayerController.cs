@@ -4,9 +4,10 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Player player;
-    [SerializeField] Joystick joystick;
+    [SerializeField] private Joystick joystick;
     public Player Player => player;
     public NavMeshAgent NavAgent;
+    public Joystick Joystick => joystick;
     public void Init()
     {
         
