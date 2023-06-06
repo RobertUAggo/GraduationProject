@@ -1,15 +1,9 @@
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using Newtonsoft.Json;
 using System;
+using System.IO;
+using Newtonsoft.Json;
 
 public static class SaveLoadSystem
 {
-    //const string cryptoKey = "Q3JpcHRvZ3JhZmlhcyBjb20gUmluamRhZWwgLyBBRVM=";
-    const string cryptoKey = "YnJlYXRoZWV4YWN0bHl0dXJubWVucmF0aGVybW9udGg=";
-    private const int keySize = 256;
-    private const int ivSize = 16;
-    private static readonly byte[] key = Convert.FromBase64String(cryptoKey);
     public static void Save<T>(T data, string path)
     {
         using (StreamWriter streamWriter = new StreamWriter(path))
