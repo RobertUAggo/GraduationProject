@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LoadScreenUI : BaseUI
@@ -14,5 +11,4 @@ public class LoadScreenUI : BaseUI
     {
         fillBarUI.Set((int)(progress * 100), 100);
     }
-
 }

@@ -6,7 +6,6 @@ public class ChoosePanelUI : BaseUI
 {
     [SerializeField] private ChooseObjectUI prefab;
     [SerializeField] private Transform root;
-
     public override void Hide()
     {
         gameObject.SetActive(false);
@@ -30,5 +29,4 @@ public class ChoosePanelUI : BaseUI
             newChooseObjectUI.Set(envObj);
         }
     }
-
 }

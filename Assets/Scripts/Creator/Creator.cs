@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class Creator : MonoSingleton<Creator>
 {
     public EnvironmentManager EnvironmentManager;

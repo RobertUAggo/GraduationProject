@@ -2434,22 +2434,6 @@ PrefabInstance:
       propertyPath: bulletsManager
       value: 
       objectReference: {fileID: 555084868}
-    - target: {fileID: 5802954123553446908, guid: 3bf61cabdb5e4ca4db6d273427a1566b, type: 3}
-      propertyPath: SkinManager.skins.Array.data[0].OnStart.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5802954123553446908, guid: 3bf61cabdb5e4ca4db6d273427a1566b, type: 3}
-      propertyPath: SkinManager.skins.Array.data[0].OnStart.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5802954123553446908, guid: 3bf61cabdb5e4ca4db6d273427a1566b, type: 3}
-      propertyPath: SkinManager.skins.Array.data[0].OnStart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1909709584}
-    - target: {fileID: 5802954123553446908, guid: 3bf61cabdb5e4ca4db6d273427a1566b, type: 3}
-      propertyPath: SkinManager.skins.Array.data[0].OnStart.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8526992316771132909, guid: 3bf61cabdb5e4ca4db6d273427a1566b, type: 3}
       propertyPath: m_RootOrder
       value: 0

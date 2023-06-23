@@ -74,14 +74,15 @@ public class Player : BaseCreature
     }
     private IEnumerator C_HealthRegen()
     {
+        yield return new WaitForSeconds(healthRegenTime);
         while (IsAlive)
         {
-            yield return new WaitForSeconds(healthRegenTime);
-            if (Health < MaxHealth)
+            if (Health < MaxHealth )
             {
                 Health += 1;
                 healthBarUI.Set(Health, MaxHealth);
             }
+            yield return new WaitForSeconds(healthRegenTime);
         }
     }
     private IEnumerator C_RangeAttack()
